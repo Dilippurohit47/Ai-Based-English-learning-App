@@ -15,38 +15,7 @@ const Hero = () => {
   const [input, setInput] = useState<string | undefined>("");
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [chat, setChat] = useState<ChatType[]>([
-    {
-      name: "ai",
-      res: "hello first text",
-    },
-    {
-      name: "user",
-      res: "I want to learn english bro",
-    },
-    {
-      name: "ai",
-      res: "nice to meet you, I can help you with english",
-    },
-    {
-      name: "user",
-      res: "I want to learn english bro last text",
-    },
-    {
-      name: "ai",
-      res: "nice to meet you, I can help you with english",
-    },
-    {
-      name: "user",
-      res: "I want to learn english bro last text",
-    },
-    {
-      name: "user",
-      res: "I want to learn english bro last text",
-    },
-    {
-      name: "user",
-      res: "I want to learn english bro last text",
-    },
+   
     
   ]);
 
@@ -59,8 +28,8 @@ const Hero = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await model.generateContent(prompt!);
-        console.log(result.response.text());
+        const result = await model.generateContent(prompt || "hello");
+        console.log(result.response.text())
         addMessage("ai", result.response.text());
       } catch (error) {
         console.error("Error generating content:", error);
