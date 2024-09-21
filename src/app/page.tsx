@@ -1,9 +1,10 @@
 "use client";
 import Header from "@/components/my-components/header";
-import { Button } from "@/components/ui/button";
+import Hero from "./Home";
 
 export default function Home() {
-  return <div >
+  return <div className=" " >
     <Header />
+    <Hero />
   </div>;
 }

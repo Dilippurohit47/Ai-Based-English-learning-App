@@ -4,11 +4,11 @@ import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 
 interface LinkItem {
-    name: string;
-    href: string;
-  }
+  name: string;
+  href: string;
+}
 
-const Links:LinkItem[] = [
+const Links: LinkItem[] = [
   {
     name: "Home",
     href: "/",
@@ -29,7 +29,7 @@ const Links:LinkItem[] = [
 
 const Header = () => {
   return (
-    <div className="bg-[#131D29] text-white px-4 py-4 md:px-10 md:py-5 flex items-center justify-between">
+    <nav className="bg-[#131D29] text-white px-4 py-4 md:px-10 md:py-5 flex items-center justify-between border-b border-b-[#8080805c]">
       <div>Logo</div>
 
       <div className="md:hidden">
@@ -39,7 +39,8 @@ const Header = () => {
       <div className="md:flex gap-5 items-center hidden  ">
         <div className="md:flex items-center gap-10 mr-10 hidden ">
           {Links.map((item, index) => (
-            <Link key={index}
+            <Link
+              key={index}
               className="text-1xl hover:text-red-400 transition-all ease-in-out duration-200 "
               href={item.href}
             >
@@ -55,7 +56,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
