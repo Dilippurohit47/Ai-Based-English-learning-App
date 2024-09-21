@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import TextToSpeech from "./TextToSpeech";
 export interface ChatType {
   name: string;
   res: string;
@@ -9,15 +10,14 @@ interface ChatProps {
 }
 
 const Chat: React.FC<ChatProps> = ({ chat }) => {
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [chat]); 
-
+  }, [chat]);
   return (
     <div className="bg-[#080c1185] h-[85%] scroll-container overflow-y-auto overflow-x-hidden  rounded-2xl mt-5 px-8 py-5  w-3/4     ">
       {chat.map((item, index) =>
@@ -45,6 +45,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
           </div>
         )
       )}
+
       <div ref={messagesEndRef} />
     </div>
   );
