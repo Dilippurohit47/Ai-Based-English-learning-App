@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import React, { useEffect, useState } from "react";
 
@@ -19,17 +18,20 @@ const Hero = () => {
   const [speech,setSpeech] = useState<string | undefined >("")
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+console.log(input)
   const addMessage = (name: string, response: string) => {
     setChat((prev) => [...prev, { name, res: response }]);
   };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await model.generateContent(prompt || "hello");
-        console.log(result.response.text());
-        setSpeech(result.response.text())
-        addMessage("ai", result.response.text());
+        if(prompt){
+          const result = await model.generateContent(prompt || "hello");
+          console.log(result.response.text());
+          setSpeech(result.response.text())
+          addMessage("ai", result.response.text());
+        }
+   
       } catch (error) {
         console.error("Error generating content:", error);
       }
@@ -49,6 +51,7 @@ const Hero = () => {
         addMessage={addMessage}
         setPrompt={setPrompt}
         text={speech!}
+        setSpeech={setSpeech}
       />
     </div>
   );

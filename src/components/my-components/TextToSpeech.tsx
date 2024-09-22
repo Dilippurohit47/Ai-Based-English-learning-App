@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { IoVolumeMute } from "react-icons/io5";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { IoVolumeHighSharp } from "react-icons/io5";
+import { FaVolumeHigh } from "react-icons/fa6";
+
 interface TextToSpeechProps {
   text: string;
+  setSpeech: Dispatch<SetStateAction<string | undefined>>;
+  setStartSpeaking: Dispatch<SetStateAction<boolean>>
 }
 
-const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
+const TextToSpeech: React.FC<TextToSpeechProps> = ({
+  text,
+  setStartSpeaking,
+  setSpeech
+}) => {
   const [isPaused, setIsPaused] = useState(false);
   const [utterance, setUtterance] = useState<SpeechSynthesisUtterance | null>(
     null
@@ -51,14 +57,17 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
 
   return (
     <div className="flex gap-4">
+
       <Button
-        onClick={isPaused ? handleResume : handlePause}
-        className="hover:ring-1 ring-red-400"
-      >
-        {isPaused ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-      </Button>
-      <Button onClick={handleStop} className="" variant="secondary">
-        Stop
+        onClick={() => {
+          handleStop(); 
+          setStartSpeaking(false); 
+          setSpeech("")
+        }}
+        className="flex gap-2 items-center "
+        variant="secondary"
+>
+        Stop  <p className="translate-y-[2px]"><FaVolumeHigh/></p>
       </Button>
     </div>
   );
