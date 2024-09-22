@@ -4,10 +4,16 @@ import { FaMicrophoneSlash } from "react-icons/fa";
 
 interface ChatInputProps {
   setInput: React.Dispatch<React.SetStateAction<string | undefined>>;
+  input: string | undefined;
+  addMessage: (name: string, response: string) => void;
+  setPrompt: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
   setInput,
+  input,
+  addMessage,
+  setPrompt,
 }) => {
   const [transcript, setTranscript] = useState("");
   const [listening, setListening] = useState(false);
@@ -26,23 +32,27 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
     recognition.current.lang = "en-US";
 
     recognition.current.onstart = () => setListening(true);
-    recognition.current.onend = () => setListening(false);
 
     recognition.current.onresult = (event: any) => {
       const newTranscript = Array.from(event.results)
         .map((result) => result[0].transcript)
         .join("");
       setTranscript(newTranscript);
-      setInput((prev) => prev ? `${prev} ${newTranscript}` : newTranscript);
+      setInput((prev) => (prev ? `${prev} ${newTranscript}` : newTranscript));
 
+      recognition.current.onend = () => {
+        console.log("Speech recognition ended.");
+        setListening(false);
+      };
 
-      // Reset the silence timeout
+  
+
       if (silenceTimeout.current) {
         clearTimeout(silenceTimeout.current);
       }
       silenceTimeout.current = setTimeout(() => {
         stopListening();
-      }, 2000); // Stop listening after 2 seconds of silence
+      }, 1000); 
     };
 
     recognition.current.onerror = (event: any) => {
@@ -52,7 +62,17 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
     return () => {
       recognition.current.stop();
     };
-  }, []);
+  }, [input, addMessage, setInput, setPrompt]);
+
+  useEffect(() =>{
+    console.log("2nd usefef")
+    if (input) {
+      addMessage("user", input!);
+      setInput("");
+      setPrompt(transcript);
+      setTranscript("");
+    }
+  },[transcript])
 
   const startListening = () => {
     recognition.current.start();
@@ -66,16 +86,13 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
     }
   };
 
+
+
   return (
     <div>
       <button onClick={startListening} disabled={listening}>
-        <FaMicrophone />
+        <FaMicrophone className={` ${listening ? "text-blue-600" : ""} `} />
       </button>
-
-      {/* <button onClick={stopListening} disabled={!listening}>
-        <FaMicrophoneSlash />
-      </button> */}
-
     </div>
   );
 };

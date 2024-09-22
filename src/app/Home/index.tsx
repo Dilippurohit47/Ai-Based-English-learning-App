@@ -18,7 +18,6 @@ const Hero = () => {
   const [speech,setSpeech] = useState<string | undefined >("")
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-console.log(input)
   const addMessage = (name: string, response: string) => {
     setChat((prev) => [...prev, { name, res: response }]);
   };
@@ -26,8 +25,7 @@ console.log(input)
     const fetchData = async () => {
       try {
         if(prompt){
-          const result = await model.generateContent(prompt || "hello");
-          console.log(result.response.text());
+          const result = await model.generateContent(` Never Use emoji i said never ${prompt} ` || "hello");
           setSpeech(result.response.text())
           addMessage("ai", result.response.text());
         }

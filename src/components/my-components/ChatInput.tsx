@@ -1,8 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useState
-} from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { FaVolumeHigh } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -26,22 +22,39 @@ const ChatInput: React.FC<ChatInputProps> = ({
 }) => {
   const [startSpeaking, setStartSpeaking] = useState<boolean>(false);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && input) {
+      e.preventDefault(); 
+      handleSend(); 
+    }
+  };
+
+
+  const handleSend = () => {
+    addMessage("user", input!), setInput("");
+    setPrompt(input);
+  };
+
   return (
     <div className="flex w-3/4 items-center justify-center gap-3">
       <Input
         value={input}
-        placeholder="Start Your Learning Journey "
-        className=" w-2/4 text-black"
-        onChange={(e) => setInput(e.target.value)}
+        placeholder="Start Your Learning Journey type or speak something.... "
+        className=" w-2/4 text-black text-1xl"
+        onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown}
       />
-      <NativeSpeechRecognitionTest setInput={setInput} />
+      <NativeSpeechRecognitionTest
+        setInput={setInput}
+        addMessage={addMessage}
+        input={input}
+        setPrompt={setPrompt}
+      />
 
       <Button
         disabled={!input}
         variant={"destructive"}
         onClick={(e) => {
-          addMessage("user", input!), setInput("");
-          setPrompt(input);
+          handleSend();
         }}
       >
         Send
