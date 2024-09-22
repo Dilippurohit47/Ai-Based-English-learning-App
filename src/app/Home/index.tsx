@@ -1,4 +1,3 @@
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import React, { useEffect, useState } from "react";
 
@@ -15,7 +14,7 @@ const Hero = () => {
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [chat, setChat] = useState<ChatType[]>([]);
 
-  const [speech,setSpeech] = useState<string | undefined >("")
+  const [speech, setSpeech] = useState<string | undefined>("");
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const addMessage = (name: string, response: string) => {
@@ -24,12 +23,14 @@ const Hero = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(prompt){
-          const result = await model.generateContent(` Never Use emoji i said never ${prompt} ` || "hello");
-          setSpeech(result.response.text())
+        if (prompt) {
+          const result = await model.generateContent(
+            ` avoid emojis As an English tutor, your role is to assist people in learning and practicing English. Focus on correct grammar not on pronounciation,  and real-world conversations. Do not discuss unrelated topics. Please correct any errors in their sentences you have to play role of english tutor and respond  you also have to talk and as conversation questions First you have to questions and in user response ask next question correct only if they are wrong in pronouncitaion and and respond only in one or two line please donst ask unnecessary things . User's input: ${prompt}  and if sentence is wrong tell user to speak again that sentence avoid emojis please and give tips to improve sentences
+            ` || "hello"
+          );
+          setSpeech(result.response.text());
           addMessage("ai", result.response.text());
         }
-   
       } catch (error) {
         console.error("Error generating content:", error);
       }

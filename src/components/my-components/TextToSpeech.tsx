@@ -5,13 +5,13 @@ import { FaVolumeHigh } from "react-icons/fa6";
 interface TextToSpeechProps {
   text: string;
   setSpeech: Dispatch<SetStateAction<string | undefined>>;
-  setStartSpeaking: Dispatch<SetStateAction<boolean>>
+  setStartSpeaking: Dispatch<SetStateAction<boolean>>;
 }
 
 const TextToSpeech: React.FC<TextToSpeechProps> = ({
   text,
   setStartSpeaking,
-  setSpeech
+  setSpeech,
 }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [utterance, setUtterance] = useState<SpeechSynthesisUtterance | null>(
@@ -57,17 +57,31 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
 
   return (
     <div className="flex gap-4">
-
       <Button
         onClick={() => {
-          handleStop(); 
-          setStartSpeaking(false); 
-          setSpeech("")
+          handleStop();
+          setStartSpeaking(false);
+          setSpeech("");
         }}
         className="flex gap-2 items-center "
         variant="secondary"
->
-        Stop  <p className="translate-y-[2px]"><FaVolumeHigh/></p>
+      >
+        Stop{" "}
+        <p className="translate-y-[2px]">
+          <FaVolumeHigh />
+        </p>
+      </Button>
+      <Button
+        onClick={() => {
+          setSpeech("");
+        }}
+        className="flex gap-2 items-center "
+        variant="secondary"
+      >
+        Skip{" "}
+        <p className="translate-y-[2px]">
+          <FaVolumeHigh />
+        </p>
       </Button>
     </div>
   );

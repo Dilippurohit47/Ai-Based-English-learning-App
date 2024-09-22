@@ -52,7 +52,7 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
       }
       silenceTimeout.current = setTimeout(() => {
         stopListening();
-      }, 1000); 
+      }, 2000); 
     };
 
     recognition.current.onerror = (event: any) => {

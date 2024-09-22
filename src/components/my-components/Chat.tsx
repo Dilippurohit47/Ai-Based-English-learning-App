@@ -33,7 +33,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
             <p className="text-1xl  font-normal">{item.res}</p>
           </div>
         ) : (
-          <div className=" w-[70vw]   flex  items-center justify-end gap-4">
+          <div className=" w-[70vw]  mb-4 flex  items-center justify-end gap-4">
             <p className="text-1xl font-normal">{item.res}</p>
             <img
               src={
