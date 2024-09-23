@@ -24,7 +24,8 @@
     "regenerator-runtime": "^0.14.1",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "text-to-speech": "^1.0.10"
+    "text-to-speech": "^1.0.10",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "@types/node": "^20",

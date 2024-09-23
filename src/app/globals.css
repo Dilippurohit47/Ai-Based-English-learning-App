@@ -2,14 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 .scroll-container::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Edge */
@@ -70,8 +67,6 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -80,3 +75,4 @@
     @apply bg-background text-foreground;
   }
 }
+

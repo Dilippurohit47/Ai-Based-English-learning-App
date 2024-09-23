@@ -13,8 +13,8 @@ interface LinkItem {
 
 const Links: LinkItem[] = [
   {
-    name: "Home",
-    href: "/",
+    name: "Start",
+    href: "/lets-talk",
   },
   {
     name: "Pricing",
