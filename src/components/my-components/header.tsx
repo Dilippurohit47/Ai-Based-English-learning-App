@@ -31,8 +31,8 @@ const Links: LinkItem[] = [
 ];
 
 const Header = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
-
+  // const { isLoaded, isSignedIn, user } = useUser();
+const isSignedIn = true
   return (
     <nav className="bg-[#131D29] text-white px-4 py-4 md:px-10 md:py-5 flex items-center justify-between border-b border-b-[#8080805c]">
       <div>Logo</div>

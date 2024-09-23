@@ -1,4 +1,4 @@
-import React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,12 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AiOutlineThunderbolt } from "react-icons/ai";
-import { Button } from "@/components/ui/button";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
-import Header from "@/components/my-components/header";
-
 
 interface Benefit {
   [key: string]: string;
@@ -43,7 +39,7 @@ const PackagePlans: PackageTypes[] = [
     ],
   },
   {
-    name: "Pro Package",
+    name: "Premium Package",
     price: 100,
     benefits: [
       {
@@ -82,52 +78,48 @@ const PackagePlans: PackageTypes[] = [
 
 const Page = () => {
   return (
-    <>
-<Header/>
-    <div className="py-20 ">
+    <div className="py-10 bg-[#FFFFFF] ">
       <h1 className="text-center  text-4xl font-semibold">Buy Package</h1>
-      <p className="text-center text-[1.5rem] text-gray-500 mt-2 mb-4">Choose a pack that suits your need</p>
-    <div className="flex h-full   items-center  gap-8  justify-center ">
+      <p className="text-center text-[1.5rem] text-gray-500 mt-2 mb-4">
+        Choose a pack that suits your need
+      </p>
+      <div className=" flex flex-col md:flex-row h-full   items-center  gap-8  justify-center ">
+        {PackagePlans?.map((item, index) => (
+          <Card className="px-8 py-8 w-[21vw]  cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 shadow-lg ">
+            <CardHeader>
+              <CardTitle className="text-center  text-gray-600 mb-4">
+                {item.name}
+              </CardTitle>
+              <CardDescription className="text-center  text-black text-3xl font-bold">
+                ${item.price}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="mt-4 flex flex-col gap-5">
+              {item.benefits.map((bene, index) => (
+                <div className="flex gap-2 items-center">
+                  {bene.available === "Yes" ? (
+                    <p className="bg-gray-300 rounded-full p-1 text-blue-500">
+                      <IoMdCheckmark />
+                    </p>
+                  ) : (
+                    <p className="bg-gray-300 rounded-full p-1 text-red-500">
+                      <RxCross1 />
+                    </p>
+                  )}
 
-      {PackagePlans?.map((item, index) => (
-        <Card className="px-10 py-8  shadow-lg ">
-          <CardHeader>
-            <CardTitle className="text-center text-gray-600 mb-4">
-              {item.name}
-            </CardTitle>
-            <CardDescription className="text-center  text-black text-3xl font-bold">
-              ${item.price}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="mt-4 flex flex-col gap-5">
-            {item.benefits.map((bene, index) => (
-              <div className="flex gap-2 items-center">
-                {bene.available === "Yes" ? (
-                  <p className="bg-gray-300 rounded-full p-1 text-blue-500">
-                    <IoMdCheckmark />
-                  </p>
-                ) : (
-                  <p className="bg-gray-300 rounded-full p-1 text-red-500">
-                    <RxCross1 />
-                  </p>
-                )}
-
-                <p className="text-[1.2rem] font[400]"> {bene.name}</p>
-              </div>
-            ))}
-          </CardContent>
-          <CardFooter>
-            <Button className="rounded-full mt-5 bg-blue-500 w-full ">
-              Buy
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
+                  <p className="text-[1.2rem] font[400]"> {bene.name}</p>
+                </div>
+              ))}
+            </CardContent>
+            <CardFooter>
+              <Button className="rounded-full mt-5 bg-blue-500 w-full ">
+                Buy
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
     </div>
-
-    </div>
-    </>
-
   );
 };
 
