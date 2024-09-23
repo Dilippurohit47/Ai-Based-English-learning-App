@@ -2,6 +2,9 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
+import { UserButton, useUser } from "@clerk/nextjs";
+import { UserProfile } from "@clerk/nextjs";
+
 
 interface LinkItem {
   name: string;
@@ -28,6 +31,8 @@ const Links: LinkItem[] = [
 ];
 
 const Header = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
+
   return (
     <nav className="bg-[#131D29] text-white px-4 py-4 md:px-10 md:py-5 flex items-center justify-between border-b border-b-[#8080805c]">
       <div>Logo</div>
@@ -49,11 +54,15 @@ const Header = () => {
           ))}
         </div>
         <div>
-          <Link href={"/login"}>
-            <Button className="bg-transparent hover:ring-1 text-1xl ring-red-400">
-              login
-            </Button>
-          </Link>
+          {isSignedIn ? (
+            <UserButton />
+          ) : (
+            <Link href={"/sign-in"}>
+              <Button className="bg-transparent hover:ring-1 text-1xl ring-red-400">
+                login
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

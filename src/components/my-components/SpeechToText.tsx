@@ -1,6 +1,5 @@
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
-import { FaMicrophone } from "react-icons/fa";
-import { FaMicrophoneSlash } from "react-icons/fa";
+import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 
 interface ChatInputProps {
   setInput: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -40,39 +39,43 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
       setTranscript(newTranscript);
       setInput((prev) => (prev ? `${prev} ${newTranscript}` : newTranscript));
 
-      recognition.current.onend = () => {
-        console.log("Speech recognition ended.");
-        setListening(false);
-      };
-
-  
-
       if (silenceTimeout.current) {
         clearTimeout(silenceTimeout.current);
       }
+
       silenceTimeout.current = setTimeout(() => {
-        stopListening();
-      }, 2000); 
+        recognition.current.stop();
+      }, 2000);
     };
 
     recognition.current.onerror = (event: any) => {
       console.error("Error occurred in recognition: ", event.error);
     };
 
+    recognition.current.onend = () => {
+      console.log("Speech recognition ended.");
+      setListening(false);
+    };
+
     return () => {
       recognition.current.stop();
+      if (silenceTimeout.current) {
+        clearTimeout(silenceTimeout.current);
+      }
     };
-  }, [input, addMessage, setInput, setPrompt]);
+  }, [setInput]);
 
-  useEffect(() =>{
-    console.log("2nd usefef")
+  useEffect(() => {
     if (input) {
-      addMessage("user", input!);
+      console.log("trans change");
+      recognition.current.stop();
+
+      addMessage("user", input);
       setInput("");
-      setPrompt(transcript);
+      setPrompt(input);
       setTranscript("");
     }
-  },[transcript])
+  }, [transcript]);
 
   const startListening = () => {
     recognition.current.start();
@@ -80,18 +83,18 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
 
   const stopListening = () => {
     recognition.current.stop();
-
     if (silenceTimeout.current) {
       clearTimeout(silenceTimeout.current);
     }
   };
 
-
-
   return (
     <div>
       <button onClick={startListening} disabled={listening}>
-        <FaMicrophone className={` ${listening ? "text-blue-600" : ""} `} />
+        <FaMicrophone className={`${listening ? "text-blue-600" : ""}`} />
+      </button>
+      <button onClick={stopListening} disabled={!listening}>
+        <FaMicrophoneSlash className={`${listening ? "text-red-600" : ""}`} />
       </button>
     </div>
   );
