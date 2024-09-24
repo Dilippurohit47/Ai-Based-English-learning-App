@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import React, { useEffect, useState } from "react";
 
@@ -43,7 +43,7 @@ const page = () => {
   }, [prompt]);
 
   return (
-    <div className="bg-[#131D29]  pb-8  h-[90vh] flex text-white flex-col gap-5 items-center ">
+    <div className="bg-[#131D29]  pb-8  h-[91vh] flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />
       <ChatInput
         input={input!}
