@@ -85,7 +85,7 @@ const Page = () => {
       </p>
       <div className=" flex flex-col md:flex-row h-full   items-center  gap-8  justify-center ">
         {PackagePlans?.map((item, index) => (
-          <Card className="px-8 py-8 w-[21vw]  cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 shadow-lg ">
+          <Card key={index}  className="px-8 py-8 w-[21vw]  cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 shadow-lg ">
             <CardHeader>
               <CardTitle className="text-center  text-gray-600 mb-4">
                 {item.name}

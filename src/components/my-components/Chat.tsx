@@ -22,7 +22,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
     <div className="bg-[#080c1185] h-[85%] scroll-container   justify-between overflow-y-auto overflow-x-hidden  rounded-2xl mt-5 px-8 py-5  w-3/4     ">
       {chat.map((item, index) =>
         item.name === "ai" ? (
-          <div className="flex items-center gap-4  w-3/4  mt-4 mb-4 ">
+          <div key={index} className="flex items-center gap-4  w-3/4  mt-4 mb-4 ">
             <img
               src={
                 "https://cdn.vectorstock.com/i/1000v/33/66/artificial-intelligence-icon-sign-logo-vector-49693366.avif"
@@ -33,7 +33,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
             <p className="text-1xl  font-normal">{item.res}</p>
           </div>
         ) : (
-          <div className=" w-[70vw]  mb-4 flex  items-center justify-end gap-4">
+          <div key={index} className=" w-[70vw]  mb-4 flex  items-center justify-end gap-4">
             <p className="text-1xl font-normal">{item.res}</p>
             <img
               src={
