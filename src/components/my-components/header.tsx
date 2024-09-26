@@ -55,7 +55,9 @@ const Header = () => {
           <div>
             <Link
               className="text-1xl hover:text-red-400 transition-all ease-in-out duration-200 "
-              href={`${dbUser?.plan === "1" && "6" ? "/lets-talk" : "/pricing"}`}
+              href={`${
+                dbUser?.plan === "1" && "6" ? "/lets-talk" : "/pricing"
+              }`}
             >
               Start
             </Link>
