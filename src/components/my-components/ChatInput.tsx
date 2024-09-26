@@ -53,7 +53,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
       <Button
         disabled={!input}
         variant={"destructive"}
-        onClick={(e) => {
+        onClick={() => {
           handleSend();
         }}
       >

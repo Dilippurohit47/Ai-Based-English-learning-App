@@ -7,6 +7,7 @@ import Chat from "@/components/my-components/Chat";
 import ChatInput from "@/components/my-components/ChatInput";
 import { deductCredits, getUser } from "../../../utils/supabse/apis/userApis";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export interface ChatType {
   name: string;
@@ -56,6 +57,9 @@ const page = () => {
           console.error("Error generating content:", error);
         }
       } else {
+        toast.error("credits over", {
+          className: " " // Background and text color
+        });
         console.log("credits over", credits);
       }
     };
