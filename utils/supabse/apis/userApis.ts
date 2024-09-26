@@ -32,7 +32,15 @@ export const getUser = async (clerkId: string) => {
     .from("users")
     .select("credits")
     .eq("clerk_id", clerkId)
-    .single()
+    .single();
+
+  return data;
+};
+export const getFullUser = async (clerkId: string) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select()
+    .eq("clerk_id", clerkId);
 
   return data;
 };

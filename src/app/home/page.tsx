@@ -8,8 +8,7 @@ import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 
 const LandingPage = () => {
-
-  const {isSignedIn} = useUser()
+  const { isSignedIn } = useUser();
 
   return (
     <div className=" bg-[#131D29] flex flex-col gap-8 items-center justify-center">
@@ -27,12 +26,11 @@ const LandingPage = () => {
             Demo
           </Button>
         </Link>
-      <Link href={"/pricing"}>
-      <Button className="bg-blue-500  hover:scale-110 transition-all ease-in-out duration-300">
-          Pricing
-        </Button>
-      </Link>
-
+        <Link href={"/pricing"}>
+          <Button className="bg-blue-500  hover:scale-110 transition-all ease-in-out duration-300">
+            Pricing
+          </Button>
+        </Link>
       </div>
     </div>
   );

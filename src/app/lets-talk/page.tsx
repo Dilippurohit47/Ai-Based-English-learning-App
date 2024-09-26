@@ -21,6 +21,7 @@ const page = () => {
   const addMessage = (name: string, response: string) => {
     setChat((prev) => [...prev, { name, res: response }]);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
