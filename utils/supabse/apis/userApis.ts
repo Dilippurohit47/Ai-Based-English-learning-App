@@ -23,7 +23,16 @@ export const deductCredits = async (clerkId: string) => {
     data: {
       message: "credits deducted",
       data: userData,
-
     },
   };
+};
+
+export const getUser = async (clerkId: string) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("credits")
+    .eq("clerk_id", clerkId)
+    .single()
+
+  return data;
 };
