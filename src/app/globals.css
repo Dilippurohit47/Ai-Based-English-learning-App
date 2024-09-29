@@ -120,3 +120,7 @@
     @apply after:g8 after:absolute after:bottom-0 after:left-4 after:z-[4] after:h-0.5 after:w-[35%] after:opacity-0 after:transition-all after:duration-500 after:content-[''] group-hover:after:left-[60%] group-hover:after:opacity-40;
   }
 }
+
+.same-bg{
+  background-color: #080D27;
+}

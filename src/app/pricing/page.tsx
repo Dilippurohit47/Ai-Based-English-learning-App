@@ -78,7 +78,7 @@ const PackagePlans: PackageTypes[] = [
 
 const Page = () => {
   return (
-    <div className=" bg-[#0A1B3E] h-[91vh] py-10 overflow-hidden mt-20 ">
+    <div className=" bg-[#080D27] h-[91vh] py-5 overflow-hidden mt-20 ">
       <h1 className="h3 max-lg:h4 max-md:h5 z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
         Flexible pricing for Everyone
       </h1>
@@ -86,7 +86,7 @@ const Page = () => {
         {PackagePlans?.map((item, index) => (
           <Card
             key={index}
-            className="px-8 pt-8 pb-6 w-[21vw] bg-[#080D27] rounded-3xl  cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 shadow-lg border-[1px]  border-[#006eff71]"
+            className="px-8 pt-8 pb-6 w-[21vw] bg-[#080D27] rounded-3xl  cursor-pointer hover:-translate-y-8 transition-all ease-in-out duration-500 shadow-lg border-[1px]  border-[#006eff71]"
           >
             <CardHeader>
               <CardTitle className="text-center  text-white mb-4">
