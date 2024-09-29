@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 import { useAuth, UserButton, useUser } from "@clerk/nextjs";
-import clsx from 'clsx';
+import clsx from "clsx";
 import { getFullUser } from "../../../utils/supabse/apis/userApis";
 
 interface LinkItem {
@@ -57,8 +57,11 @@ const Header = () => {
   }, [isSignedIn]);
   return (
     <nav
-    className={clsx(`bg-[#080D27] z-50 fixed top-0 left-0 w-full transition-all ease-in-out duration-300 text-white px-4 py-8 md:px-10 md:py-8 flex items-center justify-between`,hasScrolled && "    bg-[#05091D]  md:py-5" )}
-  >
+      className={clsx(
+        `bg-[#080D27] z-50 fixed top-0 left-0 w-full transition-all ease-in-out duration-300 text-white px-4 py-8 md:px-10 md:py-8 flex items-center justify-between`,
+        hasScrolled ? "md:py-4 bg-[#05091d]  " : ""
+      )}
+    >
       <Link href={"/"}>
         <div>Logo</div>
       </Link>
@@ -70,7 +73,7 @@ const Header = () => {
         <div className="md:flex items-center gap-10 mr-10 hidden ">
           <div>
             <Link
-              className="text-1xl hover:text-red-400 transition-all ease-in-out duration-200 "
+              className="text-1xl hover:text-[#C8EA80] transition-all ease-in-out duration-200 "
               href={`${
                 dbUser?.plan === "1" && "6" ? "/lets-talk" : "/pricing"
               }`}
@@ -82,7 +85,7 @@ const Header = () => {
           {Links.map((item, index) => (
             <Link
               key={index}
-              className="text-1xl hover:text-red-400 transition-all ease-in-out duration-200 "
+              className="text-1xl hover:text-[#C8EA80] transition-all ease-in-out duration-200 "
               href={item.href}
             >
               {item.name}

@@ -76,18 +76,11 @@
   }
 }
 
-.inner-shadow {
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 1);
-  transition: box-shadow ease-in-out 0.4s;
-}
 
-.glow-effect {
-  box-shadow: 0 0 15px rgba(154, 2, 255, 0.714); /* Outer glow */
-  transition: box-shadow 0.3s ease; /* Smooth transition */
-}
+
 
 .glow-effect:hover {
-  box-shadow: 0 0 10px rgba(240, 240, 241, 0.5); /* Brighter glow on hover */
+  box-shadow: 0 0 10px  rgba(154, 2, 255, 0.714); /* Brighter glow on hover */
   transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 

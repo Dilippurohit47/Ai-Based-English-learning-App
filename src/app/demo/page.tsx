@@ -57,9 +57,7 @@ const page = () => {
           console.error("Error generating content:", error);
         }
       } else {
-        toast.error("credits over", {
-          className: " " // Background and text color
-        });
+        toast.error("credits over");
         console.log("credits over", credits);
       }
     };
@@ -69,7 +67,7 @@ const page = () => {
   }, [prompt]);
 
   return (
-    <div className="bg-[#131D29]  pb-8  h-[91vh] flex text-white flex-col gap-5 items-center ">
+    <div className="bg-[#131D29]  pb-8  h-screen pt-28 flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />
       <ChatInput
         input={input!}
