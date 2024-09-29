@@ -87,7 +87,7 @@
 }
 
 .glow-effect:hover {
-  box-shadow: 0 0 25px rgba(240, 240, 241, 0.5); /* Brighter glow on hover */
+  box-shadow: 0 0 10px rgba(240, 240, 241, 0.5); /* Brighter glow on hover */
   transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 
