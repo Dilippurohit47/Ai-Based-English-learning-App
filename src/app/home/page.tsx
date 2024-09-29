@@ -12,7 +12,7 @@ const LandingPage = () => {
   const { isSignedIn } = useUser();
 
   return (
-    <div className=" bg-[#080D27] flex flex-col gap-8 items-center justify-center mb-4">
+    <div className=" bg-[#080D27] flex mt-10 flex-col gap-8 items-center justify-center mb-4">
       <TypeWriter />
       <div className=" h-2/4 w-2/4  p-4 border-[0.5px] border-[#001aff3c] rounded-3xl  ">
         <Image

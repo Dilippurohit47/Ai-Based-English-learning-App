@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 import { useAuth, UserButton, useUser } from "@clerk/nextjs";
-import { UserProfile } from "@clerk/nextjs";
+import clsx from 'clsx';
 import { getFullUser } from "../../../utils/supabse/apis/userApis";
 
 interface LinkItem {
@@ -30,9 +30,25 @@ const Links: LinkItem[] = [
 const Header = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [dbUser, setDbuser] = useState();
+
+  const [hasScrolled, setHasSrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasSrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    console.log(hasScrolled);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     const getUser = async () => {
-      const data = await getFullUser(user?.id);
+      const data = await getFullUser(user?.id!);
       if (data) {
         setDbuser(data[0]);
       }
@@ -40,9 +56,12 @@ const Header = () => {
     getUser();
   }, [isSignedIn]);
 
-  console.log("user", dbUser);
+  // console.log("user", dbUser);
+  console.log(hasScrolled);
   return (
-    <nav className="bg-[#131D29] text-white px-4 py-4 md:px-10 md:py-5 flex items-center justify-between border-b border-b-[#8080805c]">
+    <nav
+    className={clsx(`bg-[#080D27] z-50 fixed top-0 left-0 w-full transition-all ease-in-out duration-300 text-white px-4 py-8 md:px-10 md:py-8 flex items-center justify-between`,hasScrolled && "md:py-4 bg-[#05091d] " )}
+  >
       <Link href={"/"}>
         <div>Logo</div>
       </Link>
