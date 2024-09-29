@@ -8,9 +8,7 @@ const webhookSecret = process.env.NEXT_PUBLIC_WEBHOOK_SECRET || "";
 
 async function handler(request: Request) {
   const payload = await request.json();
-
   const headersList = headers();
-
   const heads = {
     "svix-id": headersList.get("svix-id"),
     "svix-timestamp": headersList.get("svix-timestamp"),
@@ -34,9 +32,7 @@ async function handler(request: Request) {
       { status: 400 }
     );
   }
-
   const eventType = evt.type;
-
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
     const { data, error } = await supabase.from("users").insert({

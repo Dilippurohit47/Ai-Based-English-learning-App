@@ -25,7 +25,7 @@ return () => {
 };
   },[])
 
-  return <div className=" bg-[#131D29] h-[90.5vh] py-16" >
+  return <div className=" bg-[#080D27] h-[90.5vh] py-16" >
 <LandingPage />
 <SecondPage />
   </div>;
