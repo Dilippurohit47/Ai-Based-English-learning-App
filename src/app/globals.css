@@ -91,6 +91,11 @@
   transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
 @layer utilities {
   .g4 {
     background: linear-gradient(#253575, #162561);

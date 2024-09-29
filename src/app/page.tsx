@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className=" bg-[#080D27] h-[90.5vh] py-16">
+    <div className=" bg-[#080D27]   py-16">
       <LandingPage />
       <SecondPage />
     </div>

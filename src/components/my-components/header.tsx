@@ -55,12 +55,9 @@ const Header = () => {
     };
     getUser();
   }, [isSignedIn]);
-
-  // console.log("user", dbUser);
-  console.log(hasScrolled);
   return (
     <nav
-    className={clsx(`bg-[#080D27] z-50 fixed top-0 left-0 w-full transition-all ease-in-out duration-300 text-white px-4 py-8 md:px-10 md:py-8 flex items-center justify-between`,hasScrolled && "md:py-4 bg-[#05091d] " )}
+    className={clsx(`bg-[#080D27] z-50 fixed top-0 left-0 w-full transition-all ease-in-out duration-300 text-white px-4 py-8 md:px-10 md:py-8 flex items-center justify-between`,hasScrolled && "    bg-[#05091D]  md:py-5" )}
   >
       <Link href={"/"}>
         <div>Logo</div>

@@ -33,7 +33,7 @@ const SecondPage = () => {
   }, []);
   
   return (
-    <div className="h-[60vh] bg-[#131D29] flex justify-center items-center">
+    <div className="h-[60vh]  bg-[#080D27]  flex justify-center items-center">
       <div className="flex gap-6 ">
         <div
           ref={boxRef1}
