@@ -8,8 +8,10 @@ const razorpay = new Razorpay({
 
 export async function POST(request: NextResponse) {
   try {
+    const { amount } = await request.json();
+
     const payment = await razorpay.orders.create({
-      amount: 10 * 10,
+      amount: amount * 10,
       currency: "INR",
       receipt: "receipt" + Math.random().toString(36).substring(7),
     });

@@ -14,8 +14,6 @@ import { RxCross1 } from "react-icons/rx";
 import CustomButton from "../../components/my-components/CustomButton";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
-import { Currency } from "lucide-react";
 
 declare global {
   interface Window {
@@ -90,16 +88,17 @@ const PackagePlans: PackageTypes[] = [
 ];
 
 const Page = () => {
-  // const [amount, setAmount] = useState(0);
 
   const handlePayment = async (amount: Number) => {
     try {
       const response = await fetch(`/api/payment`, {
         method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({amount})
       });
       const data = await response.json();
-
-      console.log("razorpay", data);
       const options = {
         key: "rzp_test_Ai4TOHEZRSbNYj",
         amount: amount * 100 * 82,
