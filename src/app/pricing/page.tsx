@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+// import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,6 +12,17 @@ import {
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 import CustomButton from "../../components/my-components/CustomButton";
+
+import Script from "next/script";
+import { useEffect, useState } from "react";
+import { Currency } from "lucide-react";
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 interface Benefit {
   [key: string]: string;
 }
@@ -22,7 +35,7 @@ interface PackageTypes {
 const PackagePlans: PackageTypes[] = [
   {
     name: "Pro Package",
-    price: 20,
+    price: 5,
     benefits: [
       {
         name: "One Month",
@@ -40,7 +53,7 @@ const PackagePlans: PackageTypes[] = [
   },
   {
     name: "Premium Package",
-    price: 100,
+    price: 50,
     benefits: [
       {
         name: "Six Months",
@@ -58,7 +71,7 @@ const PackagePlans: PackageTypes[] = [
   },
   {
     name: "Rich Package",
-    price: 200,
+    price: 90,
     benefits: [
       {
         name: "One Year",
@@ -77,8 +90,48 @@ const PackagePlans: PackageTypes[] = [
 ];
 
 const Page = () => {
+  // const [amount, setAmount] = useState(0);
+
+  const handlePayment = async (amount: Number) => {
+    try {
+      const response = await fetch(`/api/payment`, {
+        method: "POST",
+      });
+      const data = await response.json();
+
+      console.log("razorpay", data);
+      const options = {
+        key: "rzp_test_Ai4TOHEZRSbNYj",
+        amount: amount * 100 * 82,
+        currency: "INR",
+        description: "TEst0",
+        orderId: data.orderId,
+        handler: function (response: any) {
+          console.log("payment success", response);
+        },
+        theme: {
+          color: "#3399c",
+        },
+        modal: {
+          ondismiss: function () {
+            console.log("Payment window closed");
+          },
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.log("error in payment function", error);
+    }
+  };
+
   return (
     <div className=" bg-[#080D27] h-[91vh] py-5 overflow-hidden mt-20 ">
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        onLoad={() => console.log("Razorpay script loaded")}
+      />
       <h1 className="h3 max-lg:h4 max-md:h5 z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
         Flexible pricing for Everyone
       </h1>
@@ -100,7 +153,7 @@ const Page = () => {
               {item.benefits.map((bene, index) => (
                 <div className="flex gap-2 items-center">
                   {bene.available === "Yes" ? (
-                      <p className="bg-gray-300 rounded-full  p-1 text-blue-500">
+                    <p className="bg-gray-300 rounded-full  p-1 text-blue-500">
                       <IoMdCheckmark />
                     </p>
                   ) : (
@@ -114,7 +167,13 @@ const Page = () => {
               ))}
             </CardContent>
             <CardFooter className="mt-4">
-              <CustomButton>Try it Now</CustomButton>
+              <CustomButton
+                onClick={() => {
+                  handlePayment(item.price);
+                }}
+              >
+                Try it Now
+              </CustomButton>
             </CardFooter>
           </Card>
         ))}

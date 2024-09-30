@@ -1,6 +1,7 @@
+
 import React from "react";
 import {Marker} from "./Marker"
-const CustomButton = ({ children }) => {
+const CustomButton = ({ children ,onClick}) => {
   const Inner = () => (
     <>
       <span className="relative py-2 min-w-[8vw]  justify-center flex items-center min-h-[60px] px-4 g4 rounded-xl inner-before group-hover:before:opacity-100  overflow-hidden">
@@ -19,7 +20,7 @@ const CustomButton = ({ children }) => {
   );
 
   return (
-    <button className="relative p-0.5 g5 rounded-2xl shadow-500 group">
+    <button className="relative p-0.5 g5 rounded-2xl shadow-500 group" onClick={onClick}>
       <Inner />
     </button>
   );
