@@ -18,7 +18,7 @@ const CustomButton = ({ children, onClick }) => {
 
   return (
     <button
-      className="relative p-0.5 g5  max-md:w-[40vw]  rounded-2xl shadow-500 group"
+      className="relative p-0.5 g5  max-md:min-w-[40vw] w-full rounded-2xl shadow-500 group"
       onClick={onClick}
     >
       <Inner />

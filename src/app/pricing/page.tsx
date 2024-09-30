@@ -125,29 +125,29 @@ const Page = () => {
   };
 
   return (
-    <div className=" bg-[#080D27] h-[91vh] py-5 overflow-hidden mt-20 ">
+    <div className=" bg-[#080D27]  lg:h-[91vh] py-5  mt-20 ">
       <Script
         src="https://checkout.razorpay.com/v1/checkout.js"
         onLoad={() => console.log("Razorpay script loaded")}
       />
-      <h1 className="h3 max-lg:h4 max-md:h5 z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
+      <h1 className=" text-3xl max-lg:h4 max-md:h5  z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
         Flexible pricing for Everyone
       </h1>
       <div className=" flex flex-col md:flex-row mt-8  items-center  gap-8  justify-center ">
         {PackagePlans?.map((item, index) => (
           <Card
             key={index}
-            className="px-8 pt-8 pb-6 w-[21vw] bg-[#080D27] rounded-3xl  cursor-pointer hover:-translate-y-8 transition-all ease-in-out duration-500 shadow-lg border-[1px]  border-[#006eff71]"
+            className="px-8   pt-8 pb-6 min-w-[21vw] bg-[#080D27] rounded-3xl  cursor-pointer lg:hover:-translate-y-8 transition-all ease-in-out duration-500 shadow-lg border-[1px]  border-[#006eff71]"
           >
             <CardHeader>
-              <CardTitle className="text-center  text-white mb-4">
+              <CardTitle className="text-center mb-2 text-xl text-white md:mb-4">
                 {item.name}
               </CardTitle>
               <CardDescription className="text-center  text-[#C8EA80] text-3xl font-bold">
                 ${item.price}
               </CardDescription>
             </CardHeader>
-            <CardContent className="mt-4 flex flex-col text-white  gap-5">
+            <CardContent className="md:mt-4 flex flex-col text-white  gap-5">
               {item.benefits.map((bene, index) => (
                 <div className="flex gap-2 items-center">
                   {bene.available === "Yes" ? (
