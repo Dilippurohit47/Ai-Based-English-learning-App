@@ -27,12 +27,12 @@ const TypeWriter = () => {
   }, []);
 
   return (
-    <div className="flex items-start w-[50vw] flex-col gap-3">
+    <div className="flex  max-md:px-5 items-start md:w-[50vw] flex-col gap-3">
       <p
-        className="text-white font-bold text-3xl capitalize"
+        className="text-white font-bold   max-md:h-[5vh] text-2xl    md:text-3xl capitalize"
         ref={typewriterContainerRef}
       />
-      <p className="text-[#ffffff] font-bold text-center">
+      <p className="text-[#C2C9F3] text-1xl md:text-3xl max-md:mt-10  font-bold text-center">
         Practice Daily 1-2 hours to improve your English by{" "}
         <span className="text-[#34e634]">75%</span> in 1 week. We offer speech
         recognition.

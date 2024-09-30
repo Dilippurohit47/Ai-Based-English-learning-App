@@ -88,19 +88,18 @@ const PackagePlans: PackageTypes[] = [
 ];
 
 const Page = () => {
-
-  const handlePayment = async (amount: Number) => {
+  const handlePayment = async (amount: number) => {
     try {
       const response = await fetch(`/api/payment`, {
         method: "POST",
-        headers:{
+        headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify({amount})
+        body: JSON.stringify({ amount }),
       });
       const data = await response.json();
       const options = {
-        key: "rzp_test_Ai4TOHEZRSbNYj",
+        key: process.env.NEXT_PUBLIC_RAZOR_KEYID,
         amount: amount * 100 * 82,
         currency: "INR",
         description: "TEst0",
@@ -118,8 +117,8 @@ const Page = () => {
         },
       };
 
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
     } catch (error) {
       console.log("error in payment function", error);
     }

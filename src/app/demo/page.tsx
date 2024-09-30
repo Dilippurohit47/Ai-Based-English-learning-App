@@ -67,7 +67,7 @@ const page = () => {
   }, [prompt]);
 
   return (
-    <div className="bg-[#131D29]  pb-8  h-screen pt-28 flex text-white flex-col gap-5 items-center ">
+    <div className="bg-[#080D27]  pb-8  h-screen pt-28 flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />
       <ChatInput
         input={input!}

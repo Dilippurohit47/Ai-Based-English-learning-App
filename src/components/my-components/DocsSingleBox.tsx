@@ -19,15 +19,17 @@ const DocsSingleBox: React.FC<DocsSingleBoxProps> = ({ Documents }) => {
       {Documents.map((doc, index) => (
         <div
           key={index}
-          className="border-[1px] m-5 rounded-lg flex flex-col gap-4 border-[#2600ff2f] w-4/5 px-6 py-10"
+          className="border-[1px] m-5 max-md:min-h-40 rounded-lg flex flex-col gap-4 border-[#2600ff2f] w-4/5 md:px-6 px-3 py-4 md:py-10"
           onClick={() =>
             setSlide((prev) => (prev === index ? undefined : index))
           }
         >
-          <div className="flex gap-4 justify-between items-center">
-            <div className="flex gap-4">
-              <span className="text-p4  text-3xl ">{index + 1}.</span>
-              <h1 className="text-p4  text-3xl ">{doc.title}</h1>
+          <div className="flex gap-4 justify-between  flex-col md:flex-row items-center">
+            <div className="flex gap-4 ">
+              <span className="text-p4   md:text-3xl ">{index + 1}.</span>
+              <h1 className=" text-white leading-tight text-[1.2rem]  md:text-3xl ">
+                {doc.title}
+              </h1>
             </div>
 
             <div className=" border-[#8080802b] border-2 rounded-full p-1 transition-all ease-in-out duration-500 hover:border-[#51b9ff]  ">
@@ -38,7 +40,7 @@ const DocsSingleBox: React.FC<DocsSingleBoxProps> = ({ Documents }) => {
           </div>
           <SlideDown>
             {slide === index && (
-              <p className="text-[#C2C9F3]  text-[18px] leading-normal ">
+              <p className="text-[#C2C9F3] text-[1rem]  md:text-[18px] leading-normal ">
                 {doc.desc}
               </p>
             )}

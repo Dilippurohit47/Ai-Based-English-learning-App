@@ -22,11 +22,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className=" bg-[#080D27]   py-16">
+    <div className=" bg-[#080D27]  py-16">
       <LandingPage />
       <SecondPage />
-      <div className="ml-36">
-        <div className="text-[#C2C9F3] text-[4rem] text-center -mb-10 mr-60">Docs</div>
+      <div className="lg:ml-36 mt-14 ">
+        <div className="text-[#C2C9F3]   text-[3rem]   md:text-[4rem] text-center -mb-10 md:mr-60">Docs</div>
         <Docs />
       </div>
     </div>
