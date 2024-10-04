@@ -39,12 +39,11 @@ const page = () => {
     };
 
     fetchData();
-
     return () => {};
   }, [prompt]);
 
   return (
-    <div className="bg-[#131D29]  pb-8  h-[91vh] flex text-white flex-col gap-5 items-center ">
+    <div className="bg-[#080D27] md:pb-8 max-md:px-2  h-[92vh] md:h-screen mt-14 md:pt-28 flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />
       <ChatInput
         input={input!}

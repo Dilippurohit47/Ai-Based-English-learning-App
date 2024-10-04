@@ -5,8 +5,18 @@ import { Webhook, WebhookRequiredHeaders } from "svix";
 import { supabase } from "../../../../../utils/supabse/client";
 
 const webhookSecret = process.env.NEXT_PUBLIC_WEBHOOK_SECRET || "";
+interface WebhookEvent {
+  type: string;
+  data?: {
+    id: string;
+    first_name: string;
+    email_addresses: { email_address: string }[];
+    [key: string]: any; // To allow for additional properties if needed
+  };
+}
 
 async function handler(request: Request) {
+  
   const payload = await request.json();
   const headersList = headers();
   const heads = {
@@ -16,7 +26,7 @@ async function handler(request: Request) {
   };
 
   const wh = new Webhook(webhookSecret);
-  let evt: Event | null = null;
+  let evt: WebhookEvent | null = null;
 
   try {
     evt = wh.verify(

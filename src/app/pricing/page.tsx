@@ -110,11 +110,6 @@ const Page = () => {
         theme: {
           color: "#3399c",
         },
-        modal: {
-          ondismiss: function () {
-            console.log("Payment window closed");
-          },
-        },
       };
 
       const razorpay = new window.Razorpay(options);

@@ -89,7 +89,7 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex gap-2">
       <button onClick={startListening} disabled={listening}>
         <FaMicrophone className={`${listening ? "text-blue-600" : ""}`} />
       </button>

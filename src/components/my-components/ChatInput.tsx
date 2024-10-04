@@ -24,11 +24,10 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && input) {
-      e.preventDefault(); 
-      handleSend(); 
+      e.preventDefault();
+      handleSend();
     }
   };
-
 
   const handleSend = () => {
     addMessage("user", input!), setInput("");
@@ -36,47 +35,54 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   return (
-    <div className="flex w-3/4 items-center justify-center gap-3">
-      <Input
-        value={input}
-        placeholder="Start Your Learning Journey type or speak something.... "
-        className=" w-2/4 text-black text-1xl"
-        onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown}
-      />
-      <NativeSpeechRecognitionTest
-        setInput={setInput}
-        addMessage={addMessage}
-        input={input}
-        setPrompt={setPrompt}
-      />
-
-      <Button
-        disabled={!input}
-        variant={"destructive"}
-        onClick={() => {
-          handleSend();
-        }}
-      >
-        Send
-      </Button>
-      {startSpeaking ? (
-        <TextToSpeech
-          text={text}
-          setSpeech={setSpeech}
-          setStartSpeaking={setStartSpeaking}
+    <div className="flex max-md:flex-col gap-4 md:w-3/4 items-center justify-center ">
+      <div className="flex items-center  md:w-2/4 justify-center gap-3">
+        <Input
+          value={input}
+          placeholder="Start Your Learning Journey type or speak something.... "
+          className=" w-full text-black text-1xl"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
-      ) : (
+        <NativeSpeechRecognitionTest
+          setInput={setInput}
+          addMessage={addMessage}
+          input={input}
+          setPrompt={setPrompt}
+        />
+      </div>
+
+      <div className="flex max-md:w-full  items-center justify-center gap-6">
         <Button
-          onClick={() => setStartSpeaking(true)}
-          className="felx gap-2 items-center "
+          disabled={!input}
+          variant={"destructive"}
+          onClick={() => {
+            handleSend();
+          }}
+          className="md:min-w-[5vw] w-full"
         >
-          {" "}
-          Start{" "}
-          <p className="translate-y-[2px]">
-            <FaVolumeHigh />
-          </p>
+          Send
         </Button>
-      )}
+
+        {startSpeaking ? (
+          <TextToSpeech
+            text={text}
+            setSpeech={setSpeech}
+            setStartSpeaking={setStartSpeaking}
+          />
+        ) : (
+          <Button
+            onClick={() => setStartSpeaking(true)}
+            className="felx gap-2 items-center "
+          >
+            {" "}
+            Start{" "}
+            <p className="translate-y-[2px]">
+              <FaVolumeHigh />
+            </p>
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

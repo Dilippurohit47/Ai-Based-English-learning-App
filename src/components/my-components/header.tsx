@@ -60,7 +60,7 @@ const Header = () => {
   return (
     <nav
       className={clsx(
-        `bg-[#080D27] z-50 fixed top-0 left-0 w-full   max-w-full transition-all ease-in-out duration-300 text-white px-4 py-8 md:px-10 md:py-8 flex items-center justify-between`,
+        `bg-[#080D27] z-50 fixed top-0 left-0 w-full   max-w-full transition-all ease-in-out duration-300 text-white px-4 py-4 md:px-10 md:py-8 flex items-center justify-between`,
         hasScrolled ? "md:py-3 bg-[#07051d]  " : ""
       )}
     >

@@ -30,9 +30,8 @@ export const deductCredits = async (clerkId: string) => {
 export const getUser = async (clerkId: string) => {
   const { data, error } = await supabase
     .from("users")
-    .select("credits")
+    .select("credits , plan")
     .eq("clerk_id", clerkId)
-    .single();
 
   return data;
 };

@@ -32,14 +32,14 @@ const page = () => {
   useEffect(() => {
     const getCredits = async () => {
       const data = await getUser(user!?.id);
-      setCredits(data?.credits);
+      setCredits(data![0]?.credits);
     };
     getCredits();
   }, [input]);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (credits! > 0) {
+      if (credits && credits! > 0) {
         try {
           if (prompt) {
             const result = await model.generateContent(
@@ -67,7 +67,7 @@ const page = () => {
   }, [prompt]);
 
   return (
-    <div className="bg-[#080D27]  pb-8  h-screen pt-28 flex text-white flex-col gap-5 items-center ">
+    <div className="bg-[#080D27] md:pb-8 max-md:px-2  h-screen md:pt-28 flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />
       <ChatInput
         input={input!}
