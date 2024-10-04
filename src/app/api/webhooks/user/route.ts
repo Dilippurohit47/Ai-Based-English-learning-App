@@ -11,12 +11,12 @@ interface WebhookEvent {
     id: string;
     first_name: string;
     email_addresses: { email_address: string }[];
-    [key: string]: any; // To allow for additional properties if needed
+    [key: string]: any; 
   };
 }
 
 async function handler(request: Request) {
-  
+  console.log("in webhooks")
   const payload = await request.json();
   const headersList = headers();
   const heads = {

@@ -27,10 +27,22 @@ export const deductCredits = async (clerkId: string) => {
   };
 };
 
+export const planExpired =async(clerkId:string) =>{
+
+  const {data ,error} = await supabase.from("users").update({plan:0}).eq("clerk_id",clerkId)
+
+  if(error){
+    return error
+  }
+
+  return data
+
+}
+
 export const getUser = async (clerkId: string) => {
   const { data, error } = await supabase
     .from("users")
-    .select("credits , plan")
+    .select("credits , plan ,plan_expired_date ,plan_has")
     .eq("clerk_id", clerkId)
 
   return data;
