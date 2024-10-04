@@ -26,35 +26,37 @@ const page = () => {
   };
 
   const { user } = useUser();
-  const [userPlan, setUserPlan] = useState<number>(0);
+  const [userPlan, setUserPlan] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       const data = await getUser(user!?.id);
-      setUserPlan(data![0]?.plan)
+      setUserPlan(data![0]?.plan);
       console.log(userPlan);
     };
-    fetchUser()
+    fetchUser();
   }, [input]);
 
   useEffect(() => {
     const fetchData = async () => {
-  if(userPlan > 0){
-    try {
-      if (prompt) {
-        const result = await model.generateContent(
-          `avoid emojis, As an English tutor, your role is to assist people in learning and practicing English. Focus on correct grammar not on pronounciation,  and real-world conversations. Do not discuss unrelated topics. Please correct any errors in their sentences you have to play role of english tutor and respond  you also have to talk and as conversation questions ,First you have to questions and in user response ask next question, correct only if they are wrong in grammat and  respond only in one or two line please donst ask unnecessary things . User's input: ${prompt}  and if sentence is wrong tell user to speak again that sentence avoid emojis please and give tips to improve sentences and make wrong sentences right not ask to make it right you should make it right  ` ||
-            "hello"
-        );
-        setSpeech(result.response.text());
-        addMessage("ai", result.response.text());
+      if (userPlan && userPlan > 0) {
+        try {
+          if (prompt) {
+            const result = await model.generateContent(
+              `avoid emojis, As an English tutor, your role is to assist people in learning and practicing English. Focus on correct grammar not on pronounciation,  and real-world conversations. Do not discuss unrelated topics. Please correct any errors in their sentences you have to play role of english tutor and respond  you also have to talk and as conversation questions ,First you have to questions and in user response ask next question, correct only if they are wrong in grammat and  respond only in one or two line please donst ask unnecessary things . User's input: ${prompt}  and if sentence is wrong tell user to speak again that sentence avoid emojis please and give tips to improve sentences and make wrong sentences right not ask to make it right you should make it right  ` ||
+                "hello"
+            );
+            setSpeech(result.response.text());
+            addMessage("ai", result.response.text());
+          }
+        } catch (error) {
+          console.error("Error generating content:", error);
+        }
+      } else {
+        if (userPlan) {
+          toast.error("I think your plan is over");
+        }
       }
-    } catch (error) {
-      console.error("Error generating content:", error);
-    }
-  }else{
-    toast.error("I think your plan is over")
-  }
     };
 
     fetchData();
