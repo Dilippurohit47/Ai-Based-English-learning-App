@@ -27,23 +27,24 @@ export const deductCredits = async (clerkId: string) => {
   };
 };
 
-export const planExpired =async(clerkId:string) =>{
+export const planExpired = async (clerkId: string) => {
+  const { data, error } = await supabase
+    .from("users")
+    .update({ plan: 0 })
+    .eq("clerk_id", clerkId);
 
-  const {data ,error} = await supabase.from("users").update({plan:0}).eq("clerk_id",clerkId)
-
-  if(error){
-    return error
+  if (error) {
+    return error;
   }
 
-  return data
-
-}
+  return data;
+};
 
 export const getUser = async (clerkId: string) => {
   const { data, error } = await supabase
     .from("users")
     .select("credits , plan ,plan_expired_date ,plan_has")
-    .eq("clerk_id", clerkId)
+    .eq("clerk_id", clerkId);
 
   return data;
 };
@@ -54,4 +55,26 @@ export const getFullUser = async (clerkId: string) => {
     .eq("clerk_id", clerkId);
 
   return data;
+};
+
+export const updateUserPlan = async (plan: string ,clerkId:string,) => {
+  const date = new Date(Date.now());
+  const formattedDate = `${date.getFullYear()}-${(
+    "0" +
+    (date.getMonth() + 1)
+  ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+
+  date.setMonth(date.getMonth() + Number(plan));
+
+  const expiredDate = `${date.getFullYear()}-${(
+    "0" +
+    (date.getMonth() + 1)
+  ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+
+  const { data, error } = await supabase.from("users").update({
+    plan: plan,
+    plan_has: true,
+    plan_started_date: formattedDate,
+    plan_expired_date: expiredDate,
+  }).eq("clerk_id",clerkId)
 };

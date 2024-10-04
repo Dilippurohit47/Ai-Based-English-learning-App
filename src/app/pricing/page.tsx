@@ -15,7 +15,7 @@ import CustomButton from "../../components/my-components/CustomButton";
 
 import Script from "next/script";
 import { useUser } from "@clerk/nextjs";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 declare global {
   interface Window {
@@ -90,45 +90,47 @@ const PackagePlans: PackageTypes[] = [
 ];
 
 const Page = () => {
-const router = useRouter()
-  const {user} = useUser()
-console.log(user)
+  const router = useRouter();
+  const { user } = useUser();
+  console.log(user);
   const handlePayment = async (amount: number) => {
+    if (user) {
+      try {
+        const response = await fetch(`/api/payment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount }),
+        });
+        const data = await response.json();
+        const options = {
+          key: process.env.NEXT_PUBLIC_RAZOR_KEYID,
+          amount: amount * 100 * 82,
+          currency: "INR",
+          description: "TEst0",
+          orderId: data.orderId,
+          handler: function (response: any) {
+            console.log("payment success", response);
+          },
+          theme: {
+            color: "#3399c",
+          },
+        };
 
-if(user){
-  try {
-    const response = await fetch(`/api/payment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ amount }),
-    });
-    const data = await response.json();
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZOR_KEYID,
-      amount: amount * 100 * 82,
-      currency: "INR",
-      description: "TEst0",
-      orderId: data.orderId,
-      handler: function (response: any) {
-        console.log("payment success", response);
-      },
-      theme: {
-        color: "#3399c",
-      },
-    };
-
-    const razorpay = new window.Razorpay(options);
-    razorpay.open();
-  } catch (error) {
-    console.log("error in payment function", error);
-  }
-}else{
-  router.push("/sign-in")
-}
-  
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+      } catch (error) {
+        console.log("error in payment function", error);
+      }
+    } else {
+      router.push("/sign-in");
+    }
   };
+
+  const updateUserPlan = async() =>{
+    
+  }
 
   return (
     <div className=" bg-[#080D27]  lg:h-[91vh] py-5 mt-14  md:mt-20 ">
