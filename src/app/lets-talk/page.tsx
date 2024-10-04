@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import "../../app/globals.css";
 import Chat from "@/components/my-components/Chat";
 import ChatInput from "@/components/my-components/ChatInput";
+import { getUser } from "../../../utils/supabse/apis/userApis";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export interface ChatType {
   name: string;
@@ -22,20 +25,36 @@ const page = () => {
     setChat((prev) => [...prev, { name, res: response }]);
   };
 
+  const { user } = useUser();
+  const [userPlan, setUserPlan] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const data = await getUser(user!?.id);
+      setUserPlan(data![0]?.plan)
+      console.log(userPlan);
+    };
+    fetchUser()
+  }, [input]);
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (prompt) {
-          const result = await model.generateContent(
-            `avoid emojis, As an English tutor, your role is to assist people in learning and practicing English. Focus on correct grammar not on pronounciation,  and real-world conversations. Do not discuss unrelated topics. Please correct any errors in their sentences you have to play role of english tutor and respond  you also have to talk and as conversation questions ,First you have to questions and in user response ask next question, correct only if they are wrong in grammat and  respond only in one or two line please donst ask unnecessary things . User's input: ${prompt}  and if sentence is wrong tell user to speak again that sentence avoid emojis please and give tips to improve sentences and make wrong sentences right not ask to make it right you should make it right  ` ||
-              "hello"
-          );
-          setSpeech(result.response.text());
-          addMessage("ai", result.response.text());
-        }
-      } catch (error) {
-        console.error("Error generating content:", error);
+  if(userPlan > 0){
+    try {
+      if (prompt) {
+        const result = await model.generateContent(
+          `avoid emojis, As an English tutor, your role is to assist people in learning and practicing English. Focus on correct grammar not on pronounciation,  and real-world conversations. Do not discuss unrelated topics. Please correct any errors in their sentences you have to play role of english tutor and respond  you also have to talk and as conversation questions ,First you have to questions and in user response ask next question, correct only if they are wrong in grammat and  respond only in one or two line please donst ask unnecessary things . User's input: ${prompt}  and if sentence is wrong tell user to speak again that sentence avoid emojis please and give tips to improve sentences and make wrong sentences right not ask to make it right you should make it right  ` ||
+            "hello"
+        );
+        setSpeech(result.response.text());
+        addMessage("ai", result.response.text());
       }
+    } catch (error) {
+      console.error("Error generating content:", error);
+    }
+  }else{
+    toast.error("I think your plan is over")
+  }
     };
 
     fetchData();
@@ -43,7 +62,7 @@ const page = () => {
   }, [prompt]);
 
   return (
-    <div className="bg-[#080D27] md:pb-8 max-md:px-2  h-[92vh] md:h-screen mt-14 md:pt-28 flex text-white flex-col gap-5 items-center ">
+    <div className="  bg-[#080D27] md:pb-8 max-md:px-2  h-[92vh] md:h-[93vh] mt-14 md:pt-20 flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />
       <ChatInput
         input={input!}
