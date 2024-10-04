@@ -57,24 +57,48 @@ export const getFullUser = async (clerkId: string) => {
   return data;
 };
 
-export const updateUserPlan = async (plan: string ,clerkId:string,) => {
-  const date = new Date(Date.now());
-  const formattedDate = `${date.getFullYear()}-${(
-    "0" +
-    (date.getMonth() + 1)
-  ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+  export const updateUserPlan = async (plan: number, clerkId: string) => {
+      const date = new Date(Date.now());
+      const formattedDate = `${date.getFullYear()}-${(
+        "0" +
+        (date.getMonth() + 1)
+      ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
 
-  date.setMonth(date.getMonth() + Number(plan));
 
-  const expiredDate = `${date.getFullYear()}-${(
-    "0" +
-    (date.getMonth() + 1)
-  ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+      const expirationDate = new Date(date);
+      expirationDate.setMonth(expirationDate.getMonth() + plan);
 
-  const { data, error } = await supabase.from("users").update({
-    plan: plan,
-    plan_has: true,
-    plan_started_date: formattedDate,
-    plan_expired_date: expiredDate,
-  }).eq("clerk_id",clerkId)
-};
+      // Format the expiration date
+      const expiredDate = `${expirationDate.getFullYear()}-${(
+          "0" + (expirationDate.getMonth() + 1)
+      ).slice(-2)}-${("0" + expirationDate.getDate()).slice(-2)}`;
+
+
+      console.log(formattedDate, expiredDate); 
+
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({
+        plan: plan,
+        plan_has: true,
+        plan_started_date: formattedDate,
+        plan_expired_date: expiredDate,
+      })
+      .eq("clerk_id", clerkId);
+
+    if (error) {
+      console.log(error)
+      return error;
+    }
+
+    return data;
+  };
+
+
+  export const UpdateName =async(updateData,clerkId) =>{
+
+    const {data} = await supabase.from("users").update(updateData).eq("clerk_id",clerkId) 
+
+    return data;
+  }

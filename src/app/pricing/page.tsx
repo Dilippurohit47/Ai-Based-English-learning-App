@@ -16,6 +16,10 @@ import CustomButton from "../../components/my-components/CustomButton";
 import Script from "next/script";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import {
+  UpdateName,
+  updateUserPlan,
+} from "../../../utils/supabse/apis/userApis";
 
 declare global {
   interface Window {
@@ -29,6 +33,8 @@ interface Benefit {
 interface PackageTypes {
   name: string;
   price: number;
+  duration: number;
+
   benefits: Benefit[];
 }
 
@@ -36,6 +42,7 @@ const PackagePlans: PackageTypes[] = [
   {
     name: "Pro Package",
     price: 5,
+    duration: 1,
     benefits: [
       {
         name: "One Month",
@@ -54,6 +61,7 @@ const PackagePlans: PackageTypes[] = [
   {
     name: "Premium Package",
     price: 50,
+    duration: 6,
     benefits: [
       {
         name: "Six Months",
@@ -72,6 +80,8 @@ const PackagePlans: PackageTypes[] = [
   {
     name: "Rich Package",
     price: 90,
+    duration: 12,
+
     benefits: [
       {
         name: "One Year",
@@ -92,8 +102,7 @@ const PackagePlans: PackageTypes[] = [
 const Page = () => {
   const router = useRouter();
   const { user } = useUser();
-  console.log(user);
-  const handlePayment = async (amount: number) => {
+  const handlePayment = async (amount: number, duration: number) => {
     if (user) {
       try {
         const response = await fetch(`/api/payment`, {
@@ -111,6 +120,7 @@ const Page = () => {
           description: "TEst0",
           orderId: data.orderId,
           handler: function (response: any) {
+            updateUserPlanfunc(duration, user?.id);
             console.log("payment success", response);
           },
           theme: {
@@ -128,9 +138,16 @@ const Page = () => {
     }
   };
 
-  const updateUserPlan = async() =>{
-    
-  }
+  const updateUserPlanfunc = async (
+    plan = 1,
+    clerkId = "user_2mbLCOBv1aVDsBtAdvSGwNWDpFO"
+  ) => {
+    console.log("in payemnt func");
+    const data = await updateUserPlan(plan, clerkId);
+    console.log("payment success");
+
+    console.log(data);
+  };
 
   return (
     <div className=" bg-[#080D27]  lg:h-[91vh] py-5 mt-14  md:mt-20 ">
@@ -140,6 +157,9 @@ const Page = () => {
       />
       <h1 className=" text-3xl max-lg:h4 max-md:h5  z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
         Flexible pricing for Everyone
+        <button onClick={() => updateUserPlanfunc()} className="text-red-500">
+          pay
+        </button>
       </h1>
       <div className=" flex flex-col md:flex-row mt-8  items-center  gap-8  justify-center ">
         {PackagePlans?.map((item, index) => (
