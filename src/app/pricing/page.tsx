@@ -157,9 +157,7 @@ const Page = () => {
       />
       <h1 className=" text-3xl max-lg:h4 max-md:h5  z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
         Flexible pricing for Everyone
-        <button onClick={() => updateUserPlanfunc()} className="text-red-500">
-          pay
-        </button>
+ 
       </h1>
       <div className=" flex flex-col md:flex-row mt-8  items-center  gap-8  justify-center ">
         {PackagePlans?.map((item, index) => (
