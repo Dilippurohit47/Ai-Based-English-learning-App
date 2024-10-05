@@ -139,8 +139,8 @@ const Page = () => {
   };
 
   const updateUserPlanfunc = async (
-    plan = 1,
-    clerkId = "user_2mbLCOBv1aVDsBtAdvSGwNWDpFO"
+    plan ,
+    clerkId ,
   ) => {
     console.log("in payemnt func");
     const data = await updateUserPlan(plan, clerkId);
@@ -195,7 +195,7 @@ const Page = () => {
             <CardFooter className="mt-4">
               <CustomButton
                 onClick={() => {
-                  handlePayment(item.price);
+                  handlePayment(item.price,item.duration);
                 }}
               >
                 Try it Now
