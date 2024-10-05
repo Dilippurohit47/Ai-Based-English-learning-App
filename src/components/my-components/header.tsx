@@ -35,6 +35,20 @@ const Header = () => {
 
   const [hasScrolled, setHasSrolled] = useState(false);
 
+
+  useEffect(() => {
+    const getUser = async () => {
+      const data = await getFullUser(user?.id!);
+
+      if (data && data?.length >= 1) {
+        setDbuser(data[0])
+        console.log(data?.length);
+      }
+    };
+    getUser();
+  }, [isSignedIn]);
+
+
   useEffect(() => {
     const handleScroll = () => {
       setHasSrolled(window.scrollY > 40);
@@ -48,18 +62,11 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const getUser = async () => {
-      const data = await getFullUser(user?.id!);
-      if (data) {
-        setDbuser(data[0]);
-      }
-    };
-    getUser();
-  }, [isSignedIn]);
+  console.log(dbUser?.plan)
+
   return (
     <nav
-      className={clsx( 
+      className={clsx(
         `  bg-[#080D27] z-50 fixed top-0 left-0 w-full   max-w-full transition-all ease-in-out duration-300 text-white px-4 py-4 md:px-10 md:py-6 flex items-center justify-between`,
         hasScrolled ? "md:py-3 bg-[#07051d]  " : ""
       )}
@@ -77,7 +84,7 @@ const Header = () => {
             <Link
               className="text-1xl hover:text-[#C8EA80] transition-all ease-in-out duration-200 "
               href={`${
-                dbUser?.plan === "1" && "6" ? "/lets-talk" : "/pricing"
+                dbUser?.plan  > 0 ? "/lets-talk" : "/pricing"
               }`}
             >
               Start
