@@ -1,12 +1,10 @@
 "use client";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
 import { UserButton, useUser } from "@clerk/nextjs";
-import clsx from "clsx";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { RxCross1 } from "react-icons/rx";
 import { getFullUser } from "../../../utils/supabse/apis/userApis";
 import { Button } from "../ui/button";
-import { RxCross1 } from "react-icons/rx";
 interface LinkItem {
   name: string;
   href: string;
@@ -37,11 +35,11 @@ const SideBar = ({ setSidebar }: { setSidebar: any }) => {
 
   useEffect(() => {
     const getUser = async () => {
-      const data = await getFullUser(user?.id!);
-
-      if (data && data?.length >= 1) {
-        setDbuser(data[0]);
-        console.log(data?.length);
+      if (user) {
+        const data = await getFullUser(user?.id);
+        if (data && data.length >= 1) {
+          setDbuser(data[0]);
+        }
       }
     };
     getUser();

@@ -1,14 +1,14 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
+import { useEffect } from "react";
 import "regenerator-runtime/runtime";
+import { toast } from "sonner";
+import { getUser, planExpired } from "../../utils/supabse/apis/userApis";
+import Docs from "../app/docs/page";
 import LandingPage from "../app/home/page";
 import SecondPage from "../pages/SecondPage";
-import { useEffect, useState } from "react";
-import "lenis/dist/lenis.css";
-import Lenis from "lenis";
-import Docs from "../app/docs/page";
-import { getUser, planExpired } from "../../utils/supabse/apis/userApis";
-import { useUser } from "@clerk/nextjs";
-import { toast } from "sonner";
 export default function Home() {
   useEffect(() => {
     const lenis = new Lenis();

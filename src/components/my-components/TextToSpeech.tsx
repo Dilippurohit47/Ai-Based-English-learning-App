@@ -13,22 +13,11 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
   setStartSpeaking,
   setSpeech,
 }) => {
-  const [isPaused, setIsPaused] = useState(false);
-  const [utterance, setUtterance] = useState<SpeechSynthesisUtterance | null>(
-    null
-  );
-
   useEffect(() => {
     const synth = window.speechSynthesis;
     const u = new SpeechSynthesisUtterance(text);
 
     synth.cancel();
-
-    setUtterance(u);
-
-    u.onend = () => {
-      setIsPaused(false);
-    };
 
     synth.speak(u);
 
@@ -40,19 +29,16 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
   const handlePause = () => {
     const synth = window.speechSynthesis;
     synth.pause();
-    setIsPaused(true);
   };
 
   const handleStop = () => {
     const synth = window.speechSynthesis;
     synth.cancel();
-    setIsPaused(false);
   };
 
   const handleResume = () => {
     const synth = window.speechSynthesis;
     synth.resume();
-    setIsPaused(false);
   };
 
   return (

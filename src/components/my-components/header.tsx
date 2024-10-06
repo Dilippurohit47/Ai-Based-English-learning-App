@@ -38,11 +38,11 @@ const Header = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const data = await getFullUser(user?.id!);
-
-      if (data && data?.length >= 1) {
-        setDbuser(data[0]);
-        console.log(data?.length);
+      if (user) {
+        const data = await getFullUser(user.id);
+        if (data && data.length >= 1) {
+          setDbuser(data[0]);
+        }
       }
     };
     getUser();

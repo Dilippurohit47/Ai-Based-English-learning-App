@@ -30,7 +30,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   const handleSend = () => {
-    addMessage("user", input!), setInput("");
+    addMessage("user", input), setInput("");
     setPrompt(input);
   };
 

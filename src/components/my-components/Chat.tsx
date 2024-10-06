@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import TextToSpeech from "./TextToSpeech";
 
 export interface ChatType {
   name: string;

@@ -39,7 +39,7 @@ const Page = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (credits && credits! > 0) {
+      if (credits && credits > 0) {
         try {
           if (prompt) {
             const result = await model.generateContent(
@@ -50,7 +50,7 @@ const Page = () => {
             setSpeech(result.response.text());
             addMessage("ai", result.response.text());
             if (user && result) {
-              await deductCredits(user!?.id);
+              await deductCredits(user?.id);
             }
           }
         } catch (error) {

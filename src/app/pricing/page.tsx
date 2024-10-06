@@ -15,9 +15,7 @@ import CustomButton from "../../components/my-components/CustomButton";
 import Script from "next/script";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import {
-  updateUserPlan,
-} from "../../../utils/supabse/apis/userApis";
+import { updateUserPlan } from "../../../utils/supabse/apis/userApis";
 
 declare global {
   interface Window {
@@ -117,7 +115,7 @@ const Page = () => {
           currency: "INR",
           description: "TEst0",
           orderId: data.orderId,
-          handler: function (response: any) {
+          handler: function (response: Function) {
             updateUserPlanfunc(duration, user?.id);
             console.log("payment success", response);
           },
@@ -136,10 +134,7 @@ const Page = () => {
     }
   };
 
-  const updateUserPlanfunc = async (
-    plan:number ,
-    clerkId:string ,
-  ) => {
+  const updateUserPlanfunc = async (plan: number, clerkId: string) => {
     console.log("in payemnt func");
     const data = await updateUserPlan(plan, clerkId);
     console.log("payment success");
@@ -155,7 +150,6 @@ const Page = () => {
       />
       <h1 className=" text-3xl max-lg:h4 max-md:h5  z-3 relative mx-auto mb-14 max-w-lg text-center text-p4 max-md:mb-11 max-sm:max-w-sm">
         Flexible pricing for Everyone
- 
       </h1>
       <div className=" flex flex-col md:flex-row mt-8  items-center  gap-8  justify-center ">
         {PackagePlans?.map((item, index) => (
@@ -173,7 +167,7 @@ const Page = () => {
             </CardHeader>
             <CardContent className="md:mt-4 flex flex-col text-white  gap-5">
               {item.benefits.map((bene, index) => (
-                <div className="flex gap-2 items-center">
+                <div key={index} className="flex gap-2 items-center">
                   {bene.available === "Yes" ? (
                     <p className="bg-gray-300 rounded-full  p-1 text-blue-500">
                       <IoMdCheckmark />
@@ -191,7 +185,7 @@ const Page = () => {
             <CardFooter className="mt-4">
               <CustomButton
                 onClick={() => {
-                  handlePayment(item.price,item.duration);
+                  handlePayment(item.price, item.duration);
                 }}
               >
                 Try it Now

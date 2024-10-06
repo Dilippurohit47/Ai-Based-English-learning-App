@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 
 interface ChatInputProps {
@@ -9,8 +9,8 @@ interface ChatInputProps {
 }
 interface SpeechRecognitionResult {
   transcript: string;
-  confidence: number; // Optionally add confidence level
-  results: any;
+  confidence: number; 
+  results: string;
 }
 
 const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({

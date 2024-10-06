@@ -13,7 +13,7 @@ export interface ChatType {
   name: string;
   res: string;
 }
-const page = () => {
+const Page = () => {
   const [input, setInput] = useState<string | undefined>("");
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [chat, setChat] = useState<ChatType[]>([]);
@@ -32,7 +32,6 @@ const page = () => {
     const fetchUser = async () => {
       const data = await getUser(user!?.id);
       setUserPlan(data![0]?.plan);
-      console.log(userPlan);
     };
     fetchUser();
   }, [input]);
@@ -78,4 +77,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

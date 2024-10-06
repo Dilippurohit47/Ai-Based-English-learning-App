@@ -12,7 +12,7 @@ interface DocsSingleBoxProps {
 }
 
 const DocsSingleBox: React.FC<DocsSingleBoxProps> = ({ Documents }) => {
-  const [slide, setSlide] = useState<Number | undefined>(undefined);
+  const [slide, setSlide] = useState<number | undefined>(undefined);
 
   return (
     <>
