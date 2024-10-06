@@ -14,7 +14,7 @@ export interface ChatType {
   res: string;
 }
 
-const page = () => {
+const Page = () => {
   const [input, setInput] = useState<string | undefined>("");
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [chat, setChat] = useState<ChatType[]>([]);
@@ -81,4 +81,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
