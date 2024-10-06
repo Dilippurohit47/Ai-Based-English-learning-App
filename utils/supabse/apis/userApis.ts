@@ -97,11 +97,3 @@ export const getFullUser = async (clerkId: string) => {
 
     return data;
   };
-
-
-  // export const UpdateName =async(updateData,clerkId) =>{
-
-  //   const {data} = await supabase.from("users").update(updateData).eq("clerk_id",clerkId) 
-
-  //   return data;
-  // }

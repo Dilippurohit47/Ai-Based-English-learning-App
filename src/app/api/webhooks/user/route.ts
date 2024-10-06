@@ -11,12 +11,12 @@ interface WebhookEvent {
     id: string;
     first_name: string;
     email_addresses: { email_address: string }[];
-    [key: string]: any; 
+    [key: string]: any;
   };
 }
 
 async function handler(request: Request) {
-  console.log("in webhooks")
+  console.log("in webhooks");
   const payload = await request.json();
   const headersList = headers();
   const heads = {
@@ -44,15 +44,18 @@ async function handler(request: Request) {
   }
   const eventType = evt.type;
   if (eventType === "user.created" || eventType === "user.updated") {
-    const { id, ...attributes } = evt.data;
-    const { data, error } = await supabase.from("users").insert({
-      clerk_id: id,
-      userName: attributes.first_name,
-      email: attributes.email_addresses[0]?.email_address,
-      credits: 20,
-    });
+    if (evt.data) {
+      const { id, ...attributes } = evt.data;
+      const { data, error } = await supabase.from("users").insert({
+        clerk_id: id,
+        userName: attributes.first_name,
+        email: attributes.email_addresses[0]?.email_address,
+        credits: 20,
+      });
+    }
+
     return NextResponse.json(
-      { data: "user created successfully in db", error },
+      { data: "user created successfully in db" },
       { status: 202 }
     );
   }

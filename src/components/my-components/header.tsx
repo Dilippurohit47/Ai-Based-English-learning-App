@@ -28,11 +28,11 @@ const Links: LinkItem[] = [
   },
 ];
 interface User {
-  plan: string;
+  plan: number;
 }
 const Header = () => {
   const { isSignedIn, user } = useUser();
-  const [dbUser, setDbuser] = useState();
+  const [dbUser, setDbuser] = useState<User | null>();
 
   const [hasScrolled, setHasSrolled] = useState(false);
 
@@ -91,7 +91,7 @@ const Header = () => {
           <div>
             <Link
               className="text-1xl hover:text-[#C8EA80] transition-all ease-in-out duration-200 "
-              href={`${dbUser?.plan > 0 ? "/lets-talk" : "/pricing"}`}
+              href={`${dbUser && dbUser?.plan > 0 ? "/lets-talk" : "/pricing"}`}
             >
               Start
             </Link>

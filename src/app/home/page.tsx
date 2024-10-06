@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
 import TypeWriter from "../../components/my-components/TypeWriter";
 import "../globals.css";
 
-import ss from "./s.png";
+import CustomButton from "@/components/my-components/CustomButton";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
-import CustomButton from "@/components/my-components/CustomButton";
+import ss from "./s.png";
 
 const LandingPage = () => {
   const { isSignedIn } = useUser();

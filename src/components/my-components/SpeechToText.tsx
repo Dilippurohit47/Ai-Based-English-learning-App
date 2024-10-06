@@ -7,6 +7,11 @@ interface ChatInputProps {
   addMessage: (name: string, response: string) => void;
   setPrompt: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
+interface SpeechRecognitionResult {
+  transcript: string;
+  confidence: number; // Optionally add confidence level
+  results: any;
+}
 
 const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
   setInput,
@@ -32,9 +37,9 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
 
     recognition.current.onstart = () => setListening(true);
 
-    recognition.current.onresult = (event: any) => {
+    recognition.current.onresult = (event: SpeechRecognitionResult) => {
       const newTranscript = Array.from(event.results)
-        .map((result) => result[0].transcript)
+        .map((result: any) => result[0].transcript)
         .join("");
       setTranscript(newTranscript);
       setInput((prev) => (prev ? `${prev} ${newTranscript}` : newTranscript));

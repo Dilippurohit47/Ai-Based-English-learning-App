@@ -27,11 +27,13 @@ const Links: LinkItem[] = [
   },
 ];
 interface User {
+  id: string;
   plan: string;
 }
-const SideBar = ({ setSidebar }: { setSidebar: boolean }) => {
+
+const SideBar = ({ setSidebar }: { setSidebar: any }) => {
   const { isSignedIn, user } = useUser();
-  const [dbUser, setDbuser] = useState();
+  const [dbUser, setDbuser] = useState<User | null>();
 
   useEffect(() => {
     const getUser = async () => {
@@ -55,16 +57,20 @@ const SideBar = ({ setSidebar }: { setSidebar: boolean }) => {
       <div className="flex mt-8  flex-col gap-5  items-center md:hidden  ">
         <div className="flex flex-col px-3 items-start justify-center  w-full gap-6  md:hidden ">
           <div>
-            <Link onClick={() => setSidebar(false)}
+            <Link
+              onClick={() => setSidebar(false)}
               className="text-2xl text-[#C2C9F3] w-full border-b-1 transition-all font-semibold ease-in-out duration-200 "
-              href={`${dbUser?.plan > 0 ? "/lets-talk" : "/pricing"}`}
+              href={`${
+                dbUser && Number(dbUser?.plan) > 0 ? "/lets-talk" : "/pricing"
+              }`}
             >
               Start
             </Link>
           </div>
 
           {Links.map((item, index) => (
-            <Link onClick={() => setSidebar(false)}
+            <Link
+              onClick={() => setSidebar(false)}
               key={index}
               className="text-2xl border-b-1  text-[#C2C9F3]  w-full  transition-all font-semibold ease-in-out duration-200 "
               href={item.href}
