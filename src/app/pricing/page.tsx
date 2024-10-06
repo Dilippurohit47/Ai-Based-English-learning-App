@@ -17,7 +17,6 @@ import Script from "next/script";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import {
-  UpdateName,
   updateUserPlan,
 } from "../../../utils/supabse/apis/userApis";
 
@@ -139,8 +138,8 @@ const Page = () => {
   };
 
   const updateUserPlanfunc = async (
-    plan ,
-    clerkId ,
+    plan:number ,
+    clerkId:string ,
   ) => {
     console.log("in payemnt func");
     const data = await updateUserPlan(plan, clerkId);
