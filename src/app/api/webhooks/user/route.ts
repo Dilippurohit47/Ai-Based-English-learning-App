@@ -17,7 +17,6 @@ interface WebhookEvent {
 }
 
 async function handler(request: Request) {
-  console.log("in webhooks");
   const payload = await request.json();
   const headersList = headers();
   const heads = {

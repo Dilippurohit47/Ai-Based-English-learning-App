@@ -120,6 +120,8 @@ const Page = () => {
           description: "TEst0",
           orderId: data.orderId,
           handler: function (response: PaymentResponse) {
+            router.push("/lets-talk");
+
             console.log(response);
             updateUserPlanfunc(duration, user?.id);
           },

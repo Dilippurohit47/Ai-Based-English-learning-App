@@ -35,14 +35,14 @@ export default function Home() {
 
       if (user) {
         const userData = await getUser(user.id);
-
-        if (
-          userData &&
-          userData[0].plan_has &&
-          userData[0].plan_expired_date == formattedDate
-        ) {
-          await planExpired(user.id);
-          toast.error(`Your monthly plan was expired on ${formattedDate}`);
+        if (userData) {
+          if (
+            userData[0]?.plan_has &&
+            userData[0]?.plan_expired_date == formattedDate
+          ) {
+            await planExpired(user.id);
+            toast.error(`Your monthly plan was expired on ${formattedDate}`);
+          }
         }
       }
     };
