@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const lenis = new Lenis();
 
-    function raf(time:number) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
@@ -33,17 +33,18 @@ export default function Home() {
         (date.getMonth() + 1)
       ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
 
-      const userData = await getUser(user!?.id);
+      if (user) {
+        const userData = await getUser(user.id);
 
-      console.log(userData && userData![0]?.plan);
-
-      if (
-        userData![0]?.plan_has &&
-        userData![0]?.plan_expired_date == formattedDate
-      ) {
-        const data = await planExpired(user!?.id);
-        console.log(data);
-        toast.error(`Your monthly plan was expired on ${formattedDate}`);
+        if (
+          userData &&
+          userData[0].plan_has &&
+          userData[0].plan_expired_date == formattedDate
+        ) {
+          const data = await planExpired(user!?.id);
+          console.log(data);
+          toast.error(`Your monthly plan was expired on ${formattedDate}`);
+        }
       }
     };
     fetchUserPlan();

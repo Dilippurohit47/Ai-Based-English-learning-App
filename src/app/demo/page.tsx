@@ -40,7 +40,7 @@ const Page = () => {
     };
     getCredits();
   }, [input]);
-
+  console.log(credits);
   useEffect(() => {
     const fetchData = async () => {
       if (credits && credits > 0) {
@@ -61,8 +61,11 @@ const Page = () => {
           console.error("Error generating content:", error);
         }
       } else {
-        toast.error("credits over");
-        console.log("credits over", credits);
+        console.log("over")
+        if (credits && credits < 1) {
+          toast.error("credits over");
+          console.log("credits over", credits);
+        }
       }
     };
 

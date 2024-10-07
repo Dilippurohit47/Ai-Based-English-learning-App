@@ -30,8 +30,12 @@ const Page = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const data = await getUser(user!?.id);
-      setUserPlan(data![0]?.plan);
+      if (user) {
+        const data = await getUser(user?.id);
+        if (data) {
+          setUserPlan(data[0].plan);
+        }
+      }
     };
     fetchUser();
   }, [input]);

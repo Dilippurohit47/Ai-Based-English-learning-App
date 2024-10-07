@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 
 export interface ChatType {
@@ -26,7 +27,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
             key={index}
             className="flex items-center   gap-4  md:w-3/4  mt-4 mb-4 "
           >
-            <img
+            <Image
               src={
                 "https://cdn.vectorstock.com/i/1000v/33/66/artificial-intelligence-icon-sign-logo-vector-49693366.avif"
               }
@@ -41,7 +42,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
             className=" md:w-[70vw]   mb-4 flex  items-center justify-end gap-4"
           >
             <p className="md:text-1xl font-normal">{item.res}</p>
-            <img
+            <Image
               src={
                 "profile.png"
               }

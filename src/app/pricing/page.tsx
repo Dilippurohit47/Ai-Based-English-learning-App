@@ -16,9 +16,10 @@ import Script from "next/script";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { updateUserPlan } from "../../../utils/supabse/apis/userApis";
-
+// eslint-disable-next-line
 declare global {
   interface Window {
+    // eslint-disable-next-line
     Razorpay: any;
   }
 }

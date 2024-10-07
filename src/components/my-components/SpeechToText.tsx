@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
-
+// eslint-disable-next-line
 interface ChatInputProps {
+  // eslint-disable-next-line
   setInput: React.Dispatch<React.SetStateAction<string | undefined>>;
   input: string | undefined;
   addMessage: (name: string, response: string) => void;
   setPrompt: React.Dispatch<React.SetStateAction<string | undefined>>;
-}
+} 
 interface SpeechRecognitionResult {
   transcript: string;
-  confidence: number; 
+  confidence: number;
   results: string;
 }
 
@@ -21,6 +22,7 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
 }) => {
   const [transcript, setTranscript] = useState("");
   const [listening, setListening] = useState(false);
+  // eslint-disable-next-line
   const recognition = useRef<any>(null);
   const silenceTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -29,7 +31,7 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
       console.log("Browser doesn't support Speech Recognition.");
       return;
     }
-
+    // eslint-disable-next-line
     recognition.current = new (window as any).webkitSpeechRecognition();
     recognition.current.continuous = true;
     recognition.current.interimResults = false;
@@ -39,6 +41,7 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
 
     recognition.current.onresult = (event: SpeechRecognitionResult) => {
       const newTranscript = Array.from(event.results)
+        // eslint-disable-next-line
         .map((result: any) => result[0].transcript)
         .join("");
       setTranscript(newTranscript);
@@ -52,7 +55,7 @@ const NativeSpeechRecognitionTest: React.FC<ChatInputProps> = ({
         recognition.current.stop();
       }, 2000);
     };
-
+    // eslint-disable-next-line
     recognition.current.onerror = (event: any) => {
       console.error("Error occurred in recognition: ", event.error);
     };
