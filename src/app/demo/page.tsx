@@ -31,8 +31,12 @@ const Page = () => {
 
   useEffect(() => {
     const getCredits = async () => {
-      const data = await getUser(user!?.id);
-      setCredits(data![0]?.credits);
+      if (user) {
+        const data = await getUser(user.id);
+        if (data) {
+          setCredits(data[0].credits);
+        }
+      }
     };
     getCredits();
   }, [input]);

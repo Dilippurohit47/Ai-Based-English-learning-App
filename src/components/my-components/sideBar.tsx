@@ -28,8 +28,7 @@ interface User {
   id: string;
   plan: string;
 }
-
-const SideBar = ({ setSidebar }: { setSidebar: any }) => {
+const SideBar = ({ setSidebar }: { setSidebar: (state: boolean) => void }) => {
   const { isSignedIn, user } = useUser();
   const [dbUser, setDbuser] = useState<User | null>();
 

@@ -11,6 +11,7 @@ interface WebhookEvent {
     id: string;
     first_name: string;
     email_addresses: { email_address: string }[];
+    // eslint-disable-next-line
     [key: string]: any | undefined;
   };
 }
@@ -46,7 +47,7 @@ async function handler(request: Request) {
   if (eventType === "user.created" || eventType === "user.updated") {
     if (evt.data) {
       const { id, ...attributes } = evt.data;
-     await supabase.from("users").insert({
+      await supabase.from("users").insert({
         clerk_id: id,
         userName: attributes.first_name,
         email: attributes.email_addresses[0]?.email_address,
