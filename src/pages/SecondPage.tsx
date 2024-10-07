@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import Coin from "../pages/coin.png";
-import Image from "next/image";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import Coin from "../pages/coin.png";
 const SecondPage = () => {
   const boxRef1 = useRef(null);
   const boxRef2 = useRef(null);
