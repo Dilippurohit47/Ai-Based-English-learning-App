@@ -96,6 +96,9 @@ const PackagePlans: PackageTypes[] = [
   },
 ];
 
+interface PaymentResponse {
+  razorpay_payment_id: string;
+}
 const Page = () => {
   const router = useRouter();
   const { user } = useUser();
@@ -116,9 +119,9 @@ const Page = () => {
           currency: "INR",
           description: "TEst0",
           orderId: data.orderId,
-          handler: function (response: Function) {
+          handler: function (response: PaymentResponse) {
+            console.log(response);
             updateUserPlanfunc(duration, user?.id);
-            console.log("payment success", response);
           },
           theme: {
             color: "#3399c",
@@ -136,11 +139,7 @@ const Page = () => {
   };
 
   const updateUserPlanfunc = async (plan: number, clerkId: string) => {
-    console.log("in payemnt func");
-    const data = await updateUserPlan(plan, clerkId);
-    console.log("payment success");
-
-    console.log(data);
+    await updateUserPlan(plan, clerkId);
   };
 
   return (

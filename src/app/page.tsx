@@ -41,8 +41,7 @@ export default function Home() {
           userData[0].plan_has &&
           userData[0].plan_expired_date == formattedDate
         ) {
-          const data = await planExpired(user!?.id);
-          console.log(data);
+          await planExpired(user.id);
           toast.error(`Your monthly plan was expired on ${formattedDate}`);
         }
       }

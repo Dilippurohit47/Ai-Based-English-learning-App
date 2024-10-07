@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { FaVolumeHigh } from "react-icons/fa6";
+import { Button } from "../ui/button";
 
 interface TextToSpeechProps {
   text: string;
@@ -26,19 +26,9 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
     };
   }, [text]);
 
-  const handlePause = () => {
-    const synth = window.speechSynthesis;
-    synth.pause();
-  };
-
   const handleStop = () => {
     const synth = window.speechSynthesis;
     synth.cancel();
-  };
-
-  const handleResume = () => {
-    const synth = window.speechSynthesis;
-    synth.resume();
   };
 
   return (
