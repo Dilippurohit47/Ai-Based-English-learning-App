@@ -7,7 +7,7 @@ export default function Page() {
   const redirectUrl = searchparams!.get("redirect");
 
   return (
-    <div className="flex h-screen justify-center items-center">
+    <div className="flex h-screen justify-center items-center bg-[#080D27]">
       <SignIn
         fallbackRedirectUrl={`${redirectUrl ? `/${redirectUrl}` : "/"}`}
         signUpFallbackRedirectUrl="/"

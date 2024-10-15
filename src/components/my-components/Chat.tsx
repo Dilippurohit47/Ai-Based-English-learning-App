@@ -29,10 +29,12 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
           >
             <Image
               src={
-                "https://cdn.vectorstock.com/i/1000v/33/66/artificial-intelligence-icon-sign-logo-vector-49693366.avif"
+                "/ai2.jpg"
               }
               alt="no image render"
               className="md:w-8 md:h-8 h-6  w-6 object-cover rounded-full "
+              width={20}
+              height={20}
             />
             <p className="md:text-1xl  font-normal">{item.res}</p>
           </div>
@@ -43,11 +45,11 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
           >
             <p className="md:text-1xl font-normal">{item.res}</p>
             <Image
-              src={
-                "profile.png"
-              }
+              src={"/profile.png"}
               alt="no image render"
               className="md:w-8 md:h-8 h-6  w-6  object-cover rounded-full "
+              width={20}
+              height={20}
             />
           </div>
         )
