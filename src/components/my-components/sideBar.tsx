@@ -51,7 +51,7 @@ const SideBar = ({ setSidebar }: { setSidebar: (state: boolean) => void }) => {
           <RxCross1 />
         </div>
       </div>
-      <div className="flex mt-8  flex-col gap-5  items-center md:hidden  ">
+      <div className="flex mt-8  flex-col gap-4  items-center md:hidden  ">
         <div className="flex flex-col px-3 items-start justify-center  w-full gap-6  md:hidden ">
           <div>
             <Link
@@ -76,12 +76,12 @@ const SideBar = ({ setSidebar }: { setSidebar: (state: boolean) => void }) => {
             </Link>
           ))}
         </div>
-        <div className="px-2 w-full">
+        <div className="px-2 w-full -translate-x-3" >
           {isSignedIn ? (
             <UserButton />
           ) : (
-            <Link href={"/sign-in"}>
-              <Button className="bg-transparent  text-2xl font-semibold ring-red-400">
+            <Link href={"/sign-in"}  onClick={() => setSidebar(false)} >
+              <Button className="bg-transparent  text-2xl font-semibold  text-[#C2C9F3] md:ring-red-400">
                 login
               </Button>
             </Link>
