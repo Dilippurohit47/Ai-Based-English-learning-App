@@ -29,7 +29,7 @@ const Chat: React.FC<ChatProps> = ({ chat }) => {
           >
             <Image
               src={
-                "/ai2.jpg"
+                "/ai-purple.jpg"
               }
               alt="no image render"
               className="md:w-8 md:h-8 h-6  w-6 object-cover rounded-full "

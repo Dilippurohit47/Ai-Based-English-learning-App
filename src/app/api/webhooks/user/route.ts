@@ -50,7 +50,7 @@ async function handler(request: Request) {
         clerk_id: id,
         userName: attributes.first_name,
         email: attributes.email_addresses[0]?.email_address,
-        credits: 20,
+        credits: 50,
       });
     }
 
