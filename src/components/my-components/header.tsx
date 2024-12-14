@@ -71,7 +71,7 @@ const Header = () => {
       )}
     >
       <Link href={"/"}>
-        <div>Logo</div>
+        <div className="text-[1.2rem] font-bold ">Learn <span className="text-purple-400">English.ai</span></div>
       </Link>
       <div className="md:hidden" onClick={() => setSidebar(!sideBar)}>
         <Menu />
