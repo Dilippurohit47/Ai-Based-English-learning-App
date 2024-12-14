@@ -19,7 +19,7 @@ const DocsSingleBox: React.FC<DocsSingleBoxProps> = ({ Documents }) => {
       {Documents.map((doc, index) => (
         <div
           key={index}
-          className="border-[1px] m-5 max-md:min-h-40 rounded-lg flex flex-col gap-4 border-[#2600ff2f] w-4/5 md:px-6 px-3 py-4 md:py-10"
+          className="border-[1px] m-5 max-md:min-h-40 rounded-lg flex cursor-pointer flex-col gap-4 border-[#2600ff2f] w-4/5 md:px-6 px-3 py-4 md:py-10"
           onClick={() =>
             setSlide((prev) => (prev === index ? undefined : index))
           }

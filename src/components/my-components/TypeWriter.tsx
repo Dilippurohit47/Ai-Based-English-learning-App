@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import Typewriter from "typewriter-effect/dist/core";
 
 const TypeWriter = () => {
-  const typewriterContainerRef = useRef();
+  const typewriterContainerRef = useRef<HTMLParagraphElement | null>(null);
 
   useEffect(() => {
     if (typewriterContainerRef.current) {
