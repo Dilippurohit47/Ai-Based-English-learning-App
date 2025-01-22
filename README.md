@@ -18,6 +18,7 @@ Welcome to the English Chat App – a unique platform designed to help users enh
 - [Clerk](https://clerk.dev/): User authentication and management solution.
 - [Supabase](https://supabase.com/): Backend as a Service providing real-time databases and authentication.
 - [shadcn/ui](https://shadcn.dev/): UI components for building the user interface.
+- [Nodejs]: Backend.
 
 ## Getting Started
 
