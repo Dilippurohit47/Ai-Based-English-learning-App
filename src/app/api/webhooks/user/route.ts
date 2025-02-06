@@ -1,8 +1,8 @@
+import { prisma } from "@/lib/prisma";
 import { IncomingHttpHeaders } from "http";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook, WebhookRequiredHeaders } from "svix";
-import { supabase } from "../../../../../utils/supabse/client";
 
 const webhookSecret = process.env.NEXT_PUBLIC_WEBHOOK_SECRET || "";
 interface WebhookEvent {
@@ -44,14 +44,26 @@ async function handler(request: Request) {
   }
   const eventType = evt.type;
   if (eventType === "user.created" || eventType === "user.updated") {
+    console.log(evt.data);
     if (evt.data) {
-      const { id, ...attributes } = evt.data;
-      await supabase.from("users").insert({
-        clerk_id: id,
-        userName: attributes.first_name,
-        email: attributes.email_addresses[0]?.email_address,
-        credits: 50,
-      });
+      try {
+        const { id, ...attributes } = evt.data;
+        const user = await prisma.users.create({
+          data: {
+            clerkUserId: id,
+            userName: attributes.first_name,
+            email: attributes.email_addresses[0].email_address,
+            credits: 50,
+          },
+        });
+      } catch (error) {
+        return NextResponse.json(
+          {
+            message: "Error creating user try again later",
+          },
+          { status: 200 }
+        );
+      }
     }
 
     return NextResponse.json(

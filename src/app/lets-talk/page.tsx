@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import "../../app/globals.css";
 import Chat from "@/components/my-components/Chat";
 import ChatInput from "@/components/my-components/ChatInput";
-import { getUser } from "../../../utils/supabse/apis/userApis";
+import { getUser } from "../actions/prismaActions";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 

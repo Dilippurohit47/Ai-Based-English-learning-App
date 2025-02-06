@@ -117,3 +117,7 @@
 .same-bg{
   background-color: #080D27;
 }
+.react-slidedown {
+  transition-duration: 0.3s !important; /* Adjust speed here (e.g., 100ms) */
+  transition-timing-function: ease-in-out !important; /* Customize easing */
+}

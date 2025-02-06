@@ -17,9 +17,12 @@ datasource db {
 model Users  {
   id String @unique @default(cuid())
   userName String
-  clerkUserId  String 
+  clerkUserId  String @unique
   email  String 
   credits  Int
   createdAt DateTime @default(now())
   updatedAt DateTime?
+  plan String?
+  plan_expired_date DateTime?
+  plan_has Boolean?
 }

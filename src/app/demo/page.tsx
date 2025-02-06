@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import "../../app/globals.css";
 import Chat from "@/components/my-components/Chat";
 import ChatInput from "@/components/my-components/ChatInput";
-import { deductCredits, getUser } from "../../../utils/supabse/apis/userApis";
+import { deductCredits, getUser } from "../actions/prismaActions";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 
@@ -24,23 +24,29 @@ const Page = () => {
   const addMessage = (name: string, response: string) => {
     setChat((prev) => [...prev, { name, res: response }]);
   };
-
   const { user } = useUser();
-
   const [credits, setCredits] = useState<number | undefined>(0);
+  const [creditsUsed ,setCreditsUsed] = useState<number>(0);
+
 
   useEffect(() => {
     const getCredits = async () => {
+      console.log(user)
       if (user) {
         const data = await getUser(user.id);
+        console.log("credits",data)
         if (data) {
-          setCredits(data[0].credits);
+          setCredits(data?.data?.credits);
         }
       }
     };
     getCredits();
-  }, [input]);
+  }, [user]);
 
+  const deductOneCredit =() =>{
+    setCreditsUsed((prev) =>prev +1)
+  }
+console.log(credits , creditsUsed)
   useEffect(() => {
     const fetchData = async () => {
       if (credits && credits > 0) {
@@ -53,9 +59,9 @@ const Page = () => {
             setSpeech(result.response.text());
             addMessage("ai", result.response.text());
             if (user && result) {
-              await deductCredits(user?.id);
+               deductOneCredit();
             }
-          }
+          }  
         } catch (error) {
           console.error("Error generating content:", error);
         }
@@ -65,11 +71,9 @@ const Page = () => {
         }
       }
     };
-
     fetchData();
     return () => {};
   }, [prompt]);
-
   return (
     <div className="bg-[#080D27] md:pb-8 max-md:px-2  h-screen md:pt-28 flex text-white flex-col gap-5 items-center ">
       <Chat chat={chat} />

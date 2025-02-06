@@ -15,7 +15,7 @@ import CustomButton from "../../components/my-components/CustomButton";
 import Script from "next/script";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { updateUserPlan } from "../../../utils/supabse/apis/userApis";
+import { updateUserPlan } from "../actions/prismaActions";
 // eslint-disable-next-line
 declare global {
   interface Window {

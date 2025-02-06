@@ -1,6 +1,6 @@
 import { supabase } from "../client";
 
-export const deductCredits = async (clerkId: string) => {
+export const deductCredits = async (clerkId: string) => {  
   const { data: userData, error: userError } = await supabase
     .from("users")
     .select("credits")

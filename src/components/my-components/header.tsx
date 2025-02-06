@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import clsx from "clsx";
-import { getFullUser } from "../../../utils/supabse/apis/userApis";
+// import { getFullUser } from "../../../utils/supabse/apis/userApis";
 import SideBar from "./sideBar";
 
 interface LinkItem {
@@ -36,17 +36,17 @@ const Header = () => {
 
   const [hasScrolled, setHasSrolled] = useState(false);
 
-  useEffect(() => {
-    const getUser = async () => {
-      if (user) {
-        const data = await getFullUser(user.id);
-        if (data && data.length >= 1) {
-          setDbuser(data[0]);
-        }
-      }
-    };
-    getUser();
-  }, [isSignedIn]);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     if (user) {
+  //       const data = await getFullUser(user.id);
+  //       if (data && data.length >= 1) {
+  //         setDbuser(data[0]);
+  //       }
+  //     }
+  //   };
+  //   getUser();
+  // }, [isSignedIn]);
 
   useEffect(() => {
     const handleScroll = () => {

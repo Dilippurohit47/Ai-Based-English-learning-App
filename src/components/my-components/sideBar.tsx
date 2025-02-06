@@ -3,7 +3,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { getFullUser } from "../../../utils/supabse/apis/userApis";
+// import { getFullUser } from "../../../utils/supabse/apis/userApis";
 import { Button } from "../ui/button";
 interface LinkItem {
   name: string;
@@ -32,17 +32,17 @@ const SideBar = ({ setSidebar }: { setSidebar: (state: boolean) => void }) => {
   const { isSignedIn, user } = useUser();
   const [dbUser, setDbuser] = useState<User | null>();
 
-  useEffect(() => {
-    const getUser = async () => {
-      if (user) {
-        const data = await getFullUser(user?.id);
-        if (data && data.length >= 1) {
-          setDbuser(data[0]);
-        }
-      }
-    };
-    getUser();
-  }, [isSignedIn]);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     if (user) {
+  //       const data = await getFullUser(user?.id);
+  //       if (data && data.length >= 1) {
+  //         setDbuser(data[0]);
+  //       }
+  //     }
+  //   };
+  //   getUser();
+  // }, [isSignedIn]);
   return (
     <div className="bg-[#080D27] h-[100vh] absolute left-0 top-0 w-full md:hidden">
       <div className="py-4 px-2 text-2xl font-bold flex justify-between">
