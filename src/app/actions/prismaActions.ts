@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/prisma";
 
 /** 🟢 Deduct credits from the user */
-export const deductCredits = async (clerkId: string,creditsUsed:number) => {
+export const deductCredits = async (clerkId: string) => {
   try {
     const user = await prisma.users.findFirst({
       where: { clerkUserId: clerkId },

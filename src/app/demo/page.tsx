@@ -25,43 +25,41 @@ const Page = () => {
     setChat((prev) => [...prev, { name, res: response }]);
   };
   const { user } = useUser();
-  const [credits, setCredits] = useState<number | undefined>(0);
-  const [creditsUsed ,setCreditsUsed] = useState<number>(0);
-
+  const [credits, setCredits] = useState<number>(0);
 
   useEffect(() => {
     const getCredits = async () => {
-      console.log(user)
       if (user) {
         const data = await getUser(user.id);
         console.log("credits",data)
         if (data) {
-          setCredits(data?.data?.credits);
+          if(data?.data?.credits) setCredits(data?.data?.credits);
         }
       }
     };
     getCredits();
   }, [user]);
 
-  const deductOneCredit =() =>{
-    setCreditsUsed((prev) =>prev +1)
-  }
-console.log(credits , creditsUsed)
   useEffect(() => {
     const fetchData = async () => {
+      console.log("in fetch data function",credits)
       if (credits && credits > 0) {
         try {
+      console.log("inside  fetch data function")
+
           if (prompt) {
             const result = await model.generateContent(
               `avoid emojis, As an English tutor, your role is to assist people in learning and practicing English. Focus on correct grammar not on pronounciation,  and real-world conversations. Do not discuss unrelated topics. Please correct any errors in their sentences you have to play role of english tutor and respond  you also have to talk and as conversation questions ,First you have to questions and in user response ask next question, correct only if they are wrong in grammat and  respond only in one or two line please donst ask unnecessary things . User's input: ${prompt}  and if sentence is wrong tell user to speak again that sentence avoid emojis please and give tips to improve sentences and make wrong sentences right not ask to make it right you should make it right  ` ||
                 "hello"
             );
+            console.log(result)
             setSpeech(result.response.text());
             addMessage("ai", result.response.text());
             if (user && result) {
-               deductOneCredit();
+              await deductCredits(user?.id);
+              setCredits((prev) => prev - 1)
             }
-          }  
+          }
         } catch (error) {
           console.error("Error generating content:", error);
         }
