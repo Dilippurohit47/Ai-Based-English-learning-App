@@ -33,7 +33,7 @@ const Page = () => {
       if (user) {
         const data = await getUser(user?.id);
         if (data) {
-          setUserPlan(data[0].plan);
+          setUserPlan(data[0]?.plan);
         }
       }
     };

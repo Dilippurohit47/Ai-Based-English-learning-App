@@ -22,7 +22,8 @@ model Users  {
   credits  Int
   createdAt DateTime @default(now())
   updatedAt DateTime?
-  plan String?
+  plan Int?
   plan_expired_date DateTime?
   plan_has Boolean?
-}
+  plan_started_date DateTime?
+}   

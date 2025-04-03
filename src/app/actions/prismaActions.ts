@@ -19,7 +19,7 @@ export const deductCredits = async (clerkId: string) => {
 
     const updatedUser = await prisma.users.update({
       where: { clerkUserId: clerkId },
-      data: { credits: user.credits - creditsUsed },
+      data: { credits: user.credits - 1 },
     });
 
     return { success: true, message: "Credits deducted", data: updatedUser };
@@ -105,8 +105,8 @@ export const updateUserPlan = async (plan: number, clerkId: string) => {
       data: {
         plan,
         plan_has: true,
-        plan_started_date: formattedDate,
-        plan_expired_date: expiredDate,
+        plan_started_date: new Date(),
+        plan_expired_date: new Date(new Date().setMonth(new Date().getMonth() + plan)) 
       },
     });
 

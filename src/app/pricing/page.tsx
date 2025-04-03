@@ -109,7 +109,7 @@ const Page = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-          },
+          },  
           body: JSON.stringify({ amount }),
         });
         const data = await response.json();
@@ -119,6 +119,11 @@ const Page = () => {
           currency: "INR",
           description: "TEst0",
           orderId: data.orderId,
+          notes:{
+            amount:amount * 100 * 82,
+            duration:duration,
+            dataComingFrom :"Webhook"
+          },
           handler: function (response: PaymentResponse) {
             router.push("/lets-talk");
 
