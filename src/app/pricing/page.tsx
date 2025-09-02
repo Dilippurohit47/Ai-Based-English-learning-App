@@ -123,7 +123,7 @@ const Page = () => {
             amount:amount * 100 * 82,
             duration:duration,
             dataComingFrom :"Webhook"
-          },
+          },  
           handler: function (response: PaymentResponse) {
             router.push("/lets-talk");
 

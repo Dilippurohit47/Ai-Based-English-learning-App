@@ -12,7 +12,6 @@ export async function POST(req:NextRequest) {
             { status: 500 }
         );
     }
-
     try {
         const body = await req.text();
         const rawBody = Buffer.from(body, 'utf-8');
@@ -44,7 +43,6 @@ export async function POST(req:NextRequest) {
         }
 
         console.log("Signature matched");
-        
         // Parse the webhook body
         const event = JSON.parse(body);
         
