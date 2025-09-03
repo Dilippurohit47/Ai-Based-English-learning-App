@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "next dev",
-    "build": "npx prisma generate && next build",
-    "start": "prisma migrate deploy && next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "prisma generate && prisma migrate deploy && next build",
+  "start": "next start",
+  "lint": "next lint"
+},
   "dependencies": {
     "@clerk/nextjs": "^5.6.0",
     "@google/generative-ai": "^0.19.0",
