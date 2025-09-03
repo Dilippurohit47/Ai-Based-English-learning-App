@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
-    "start": "next start",
+    "build": "prisma generate  && next build",
+    "start": " prisma migrate deploy && next start",
     "lint": "next lint"
   },
   "dependencies": {
