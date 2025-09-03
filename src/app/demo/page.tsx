@@ -14,6 +14,14 @@ export interface ChatType {
   res: string;
 }
 
+type role  = "ai" | "user"
+
+interface conversationHistoryType {
+  role:role,
+  content:string
+
+}
+
 const Page = () => {
   const [input, setInput] = useState<string | undefined>("");
   const [prompt, setPrompt] = useState<string | undefined>("");
@@ -40,15 +48,14 @@ const Page = () => {
     getCredits();
   }, [user]);
 
-  const [conversationHistory, setConversationHistory] = useState([]);
-
+  const [conversationHistory, setConversationHistory] = useState<conversationHistoryType[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       if (credits && credits > 0) {
         try {
           if (prompt) {
             // Add the user's input to the conversation history
-            const updatedHistory = [
+            const updatedHistory:conversationHistoryType[] = [
               ...conversationHistory,
               { role: "user", content: prompt },
             ];
@@ -68,11 +75,12 @@ const Page = () => {
             `);
 
             // Add the AI's response to the conversation history
-            const aiResponse = result.response.text();
-            setConversationHistory([ 
-              ...updatedHistory,
-              { role: "ai", content: aiResponse },
-            ]);
+            console.log("updated historty",updatedHistory)
+              const aiResponse = result.response.text();
+              setConversationHistory([ 
+                ...updatedHistory,
+                { role: "ai", content: aiResponse },
+              ]);
 
             // Update speech and messages
             setSpeech(aiResponse);

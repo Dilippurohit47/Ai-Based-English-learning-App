@@ -13,6 +13,14 @@ export interface ChatType {
   name: string;
   res: string;
 }
+type data  ={
+  credits:number,
+  plan: number | null,
+}
+interface userData {
+  success:boolean
+  data?:data | undefined
+}
 const Page = () => {
   const [input, setInput] = useState<string | undefined>("");
   const [prompt, setPrompt] = useState<string | undefined>("");
@@ -31,9 +39,11 @@ const Page = () => {
   useEffect(() => {
     const fetchUser = async () => {
       if (user) {
-        const data = await getUser(user?.id);
-        if (data) {
-          setUserPlan(data[0]?.plan);
+
+        const data= await getUser(user?.id);
+        if (data.data) {
+          let plan = data?.data?.plan 
+          setUserPlan(plan);
         }
       }
     };
